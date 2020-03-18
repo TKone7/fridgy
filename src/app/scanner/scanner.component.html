@@ -16,11 +16,12 @@
 
 <button (click)="scanSuccessHandler('8710447484326')" class="btn btn-primary">fake scan</button>
 <button (click)="scanSuccessHandler('874410447484326')" class="btn btn-primary">fake scan unknown</button>
-
-<button (click)="discardProduct()" class="btn btn-secondary">close</button>
+<button (click)="discardProduct()" type="button" class="btn btn-success">Scan</button>
 
 <zxing-scanner
-    *ngIf="!showAddProduct && !product"
+    [ngStyle]="{
+        'visibility': (showAddProduct || product) ? 'hidden' : 'inherit'
+    }"
     [formats]="['EAN_13']"
     (scanSuccess)="scanSuccessHandler($event)"
     >

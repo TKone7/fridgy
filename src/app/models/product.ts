@@ -15,7 +15,6 @@ export interface Product {
         fat?: number,
         fat_saturated?: number,
         fiber?: number,
-        natrium?: number,
         protein?: number,
         salt?: number
     };

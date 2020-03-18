@@ -30,7 +30,6 @@ export class ProductFormComponent implements OnInit {
     fat: new FormControl(),
     fat_saturated: new FormControl(),
     fiber: new FormControl(),
-    natrium: new FormControl(),
     nutrientbase: new FormControl('hundred_gramm'),
     protein: new FormControl(),
     salt: new FormControl()
