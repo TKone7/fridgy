@@ -15,6 +15,7 @@ import { Product } from '../models/product';
 export class ScannerComponent implements OnInit {
 event: string;
 product: Product;
+fridgeEntries: any;
 showAddProduct = false;
 
   scanSuccessHandler(event){

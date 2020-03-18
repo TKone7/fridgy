@@ -2,6 +2,7 @@
 <div *ngIf="showAddProduct" class="alert alert-primary justify-content-between d-flex" role="alert">
     Product with barcode {{ event }} not in database. 
     <button (click)="createProduct()" type="button" class="btn btn-light">Create</button>
+    <button (click)="showAddProduct = !showAddProduct" type="button" class="btn btn-danger">Close</button>
 </div>
 
 <product-card
@@ -11,8 +12,7 @@
     *ngIf="product"
     [show-actions]="true">
 </product-card>
-<inventory-record></inventory-record>
-<inventory-record></inventory-record>
+<inventory-record *ngIf="fridgeEntries"></inventory-record>
 
 <button (click)="scanSuccessHandler('8710447484326')" class="btn btn-primary">fake scan</button>
 <button (click)="scanSuccessHandler('874410447484326')" class="btn btn-primary">fake scan unknown</button>
@@ -20,6 +20,7 @@
 <button (click)="discardProduct()" class="btn btn-secondary">close</button>
 
 <zxing-scanner
+    *ngIf="!showAddProduct && !product"
     [formats]="['EAN_13']"
     (scanSuccess)="scanSuccessHandler($event)"
     >
