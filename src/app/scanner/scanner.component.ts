@@ -34,8 +34,8 @@ showAddProduct = false;
           });
   }
 
-  discardProduct() {
-    this.event = 'scanning...';
+  contScanning() {
+    this.showAddProduct = false;
     this.product = null;
   }
 
@@ -47,6 +47,9 @@ showAddProduct = false;
     this.router.navigate(['/admin/products/new'], { queryParams: { barcode: this.event }});
   }
 
+  get scanningInProgress(): boolean {
+    return (!this.showAddProduct && !this.product);
+  }
 
   constructor(
     private productService: ProductService,

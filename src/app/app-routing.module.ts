@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: '', component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'login', component:  LoginComponent},
+  { path: 'register', component:  RegisterComponent},
   { path: 'shopping-cart', component: ShoppingCartComponent },
   { path: 'scanner', component: ScannerComponent},
   {
