@@ -4,7 +4,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const path = require('path');
 
 const options = {
-    target: 'https://fridgy-api.herokuapp.com/', // target host
+    target: 'https://fridgy-api.herokuapp.com',
+    changeOrigin: true
     // pathRewrite: {
     //   '^/api/old-path': '/api/new-path', // rewrite path
     //   '^/api/remove/path': '/path' // remove base path
