@@ -1,8 +1,12 @@
 
-<div *ngIf="showAddProduct" class="alert alert-primary justify-content-between d-flex" role="alert">
-    Product with barcode {{ event }} not in database. 
-    <button (click)="createProduct()" type="button" class="btn btn-light">Create</button>
-    <button (click)="showAddProduct = !showAddProduct" type="button" class="btn btn-danger">Close</button>
+<div *ngIf="showAddProduct" class="alert alert-primary justify-content-between" role="alert">
+    <button type="button" class="close" aria-label="Close" (click)="showAddProduct = !showAddProduct">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="d-block">
+            Product with barcode {{ event }} not in database. 
+    </div>
+    <button (click)="createProduct()" type="button" class="btn btn-light">Create</button>    
 </div>
 
 <product-card
