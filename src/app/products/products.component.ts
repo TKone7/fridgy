@@ -1,5 +1,5 @@
 import { Product } from './../models/product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
@@ -16,7 +16,8 @@ export class ProductsComponent {
 
   constructor(
     productService: ProductService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private router: Router
     ) {
       productService.getAll({ order: { column: 'name', dir: 'asc'} })
       .pipe(
@@ -32,5 +33,8 @@ export class ProductsComponent {
           this.products;
         });
 
+    }
+    editProduct(product: Product) {
+      this.router.navigate(['/admin/products', product.barcode]);
     }
   }

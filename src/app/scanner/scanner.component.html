@@ -6,7 +6,7 @@
     <div class="d-block">
             Product with barcode {{ event }} not in database. 
     </div>
-    <button (click)="createProduct()" type="button" class="btn btn-light">Create</button>    
+    <button *ngIf="currentUser" (click)="createProduct()" type="button" class="btn btn-light">Create</button>    
 </div>
 
 <product-card

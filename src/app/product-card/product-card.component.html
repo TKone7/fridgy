@@ -1,6 +1,6 @@
 <div  class="card" *ngIf="product.name">
     
-    <div *ngIf="showActions" class="card-header">
+    <div class="card-header">
         <div class="row">
             <div class="col-2">
                 <button (click)="editCard()" type="button" class="btn btn-outline-secondary" style="text-align: left;">Edit</button>
@@ -18,7 +18,6 @@
     
     <img [src]="product.imgurl" class="card-img-top" *ngIf="product.imgurl" style="max-width: 250px;">
     <div class="card-body">
-        <h5 *ngIf="!showActions" class="card-title">{{ product.name }}</h5>
         <p class="card-text">{{ product.barcode }}</p>
         <p class="card-text">{{ product.description }}</p>
         <p class="card-text">{{ product.qty }} {{ product.qty_type }}</p>

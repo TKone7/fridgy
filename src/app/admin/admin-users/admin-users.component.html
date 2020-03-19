@@ -5,6 +5,7 @@
             <th>Display</th>
             <th>E-Mail</th>
             <th>Is Admin?</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +15,9 @@
             <td>{{ user.email }}</td>
             <td>
                 <input (change)="changeAdmin(user.id)" [(ngModel)]="user.isadmin" type="checkbox" aria-label="Checkbox for following text input">
+            </td>
+            <td>
+                <button (click)="deleteUser(user.id)" type="button" class="btn btn-outline-danger">Delete</button>
             </td>
         </tr>
     </tbody>

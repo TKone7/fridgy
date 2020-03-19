@@ -11,21 +11,31 @@ export class AdminUsersComponent implements OnInit {
 
   constructor(
     private userService: UserService
-  ) {
+  ) { }
+
+  changeAdmin(userId) {
+    const user = this.users.find(u => u.id === userId);
+    this.userService.update(userId, user).subscribe();
+  }
+
+  deleteUser(userId)  {
+    if (!confirm('Are you sure you want to delete this user')) return;
+
+    this.userService.delete(userId).subscribe(r => {
+      this.users = this.users.filter(user => user.id !== userId);
+    });
+
+  }
+
+  loadProducts() {
     this.userService.getAll({ order: { column: 'username', dir: 'asc'} })
       .subscribe(users => {
         this.users = users;
       });
   }
 
-  changeAdmin(userId) {
-    console.log('change: ' , userId);
-    const user = this.users.find(u => u.id === userId);
-    console.log('userobject', user);
-    this.userService.update(userId, user).subscribe();
-  }
-
   ngOnInit() {
+    this.loadProducts();
   }
 
 }

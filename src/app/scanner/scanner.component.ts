@@ -1,3 +1,5 @@
+import { AuthService } from './../services/auth.service';
+import { User } from './../models/user';
 import { NotFoundError } from './../common/not-found-error';
 import { AppError } from './../common/app-error';
 import { Router } from '@angular/router';
@@ -13,10 +15,11 @@ import { Product } from '../models/product';
   styleUrls: ['./scanner.component.css']
 })
 export class ScannerComponent implements OnInit {
-event: string;
-product: Product;
-fridgeEntries: any;
-showAddProduct = false;
+  currentUser: User;
+  event: string;
+  product: Product;
+  fridgeEntries: any;
+  showAddProduct = false;
 
   scanSuccessHandler(event){
     this.showAddProduct = false;
@@ -53,8 +56,10 @@ showAddProduct = false;
 
   constructor(
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
+    this.currentUser = this.authService.currentUserValue;
 
   }
 
