@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Display</th>
+            <th>E-Mail</th>
+            <th>Is Admin?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.displayname}}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <input (change)="changeAdmin(user.id)" [(ngModel)]="user.isadmin" type="checkbox" aria-label="Checkbox for following text input">
+            </td>
+        </tr>
+    </tbody>
+</table>

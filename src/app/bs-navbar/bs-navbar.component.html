@@ -42,6 +42,7 @@
             <ng-container *ngIf="currentUser.isadmin">
               <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
               <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+              <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/users">Manage Users</a>
             </ng-container>
             
             <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" (click)="onLogout()">Logout</a>

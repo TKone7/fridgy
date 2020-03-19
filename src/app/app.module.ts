@@ -38,6 +38,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { InventoryRecordComponent } from './fridge/inventory-record/inventory-record.component';
 import { RegisterComponent } from './register/register.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { RegisterComponent } from './register/register.component';
     ProductFilterComponent,
     ProductCardComponent,
     InventoryRecordComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminUsersComponent
   ],
   imports: [
     NgbModule,
