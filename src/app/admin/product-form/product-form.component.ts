@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 // import { CustomValidators } from 'ng2-validation';
 
 
@@ -45,6 +45,7 @@ export class ProductFormComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location
     ) {
+      
       // snapshot is good enough, cause the content of component cannot be loaded dynamically
       this.existingBarcode = this.route.snapshot.paramMap.get('barcode');
       if (this.existingBarcode) this.productService.get(this.existingBarcode)

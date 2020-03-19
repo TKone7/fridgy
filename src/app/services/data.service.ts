@@ -15,11 +15,11 @@ import { Injectable } from '@angular/core';
 export class DataService<T> {
   constructor(
     protected url: string,
-    private http: HttpClient) { }
+    protected http: HttpClient) { }
 
   httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
 
-  private handleError(error: HttpErrorResponse) {
+  protected handleError(error: HttpErrorResponse) {
     // if (error.status === 404)
     //   return throwError( new NotFoundError() );
     // if (error.status === 400)

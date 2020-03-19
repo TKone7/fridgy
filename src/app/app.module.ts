@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { ScannerComponent } from './scanner/scanner.component';
 import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
@@ -89,6 +90,7 @@ import { RegisterComponent } from './register/register.component';
     DummyDataService,
     CategoryService,
     ProductService,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useExisting: JwtInterceptor,

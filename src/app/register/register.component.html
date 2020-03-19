@@ -1,4 +1,4 @@
-<form class="form-signin" #f="ngForm" (ngSubmit)="register(f.value)">
+<form class="form-signin" [formGroup]="form" (ngSubmit)="register()">
     <h2 class="form-signin-heading">Create an account</h2>
 
     <!-- <div *ngIf="invalidLogin" class="alert alert-danger">
@@ -6,21 +6,59 @@
     </div> -->
 
     <label for="inputUser" class="sr-only">Username</label>
-    <input type="text" id="inputUser" name="username" ngModel class="form-control" placeholder="Username" required autofocus>
+    <input formControlName="username" type="text" id="inputUser" class="form-control" placeholder="Username" autofocus>
+    <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
+        
+        <div *ngIf="username.errors.required">
+            Username is required
+        </div>
+        <div *ngIf="username.errors.cannotContainSpace">
+            Username cannot contain space
+        </div>
+        <div *ngIf="username.errors.mustBeUnique">
+            Username is already taken
+        </div>
+        
+    </div>
 
-    <label for="inputDisplayName" class="sr-only">Username</label>
-    <input type="text" id="inputDisplayName" name="displayname" ngModel class="form-control" placeholder="Display name">
+    <label for="inputDisplayName" class="sr-only">Display name</label>
+    <input formControlName="displayname" type="text" id="inputDisplayName" class="form-control" placeholder="Display name (optional)">
     
     <label for="email" class="sr-only">E-Mail</label>
-    <input type="email" id="inputEmail" name="email" ngModel class="form-control" placeholder="E-Mail" required>
+    <input formControlName="email"  id="inputEmail" class="form-control" placeholder="E-Mail">
+    <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+            Email is required
+        </div>
+        <div *ngIf="email.errors.emailMustBeUnique">
+            Email is already registered
+        </div>
+        <div *ngIf="email.errors.required">
+            Email is required
+        </div>
+    </div>
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="Password" required>
+    <div formGroupName="pwd" >
 
-    <label for="inputPassword2" class="sr-only">Repeat Password</label>
-    <input type="password" id="inputPassword2" name="password2" ngModel class="form-control" placeholder="Repeat Password" required>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Password">
 
+        <label for="inputPassword2" class="sr-only">Repeat Password</label>
+        <input formControlName="passwordRepeat" type="password" id="inputPassword2" class="form-control" placeholder="Repeat Password">
+       
+        <div *ngIf="password.touched && passwordRepeat.touched && pwd.invalid" class="alert alert-danger">
+            <div *ngIf="password.errors?.required">
+                Password required
+            </div>
+            <div *ngIf="passwordRepeat.errors?.required">
+                Please repeat password
+            </div>
+            <div *ngIf="pwd.errors?.newPwdEqual">
+                Password don't match
+            </div>
+        </div> 
+    </div>
     
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit"  [disabled]="!form.valid">Register</button>
 
 </form>
