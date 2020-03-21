@@ -3,6 +3,12 @@ interface Order {
     dir: string;
 }
 
+interface Filter {
+    field: string;
+    value: string;
+}
+
 export interface Query {
-    order: Order;
+    order?: Order;
+    filter?: Filter;
 }

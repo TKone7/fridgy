@@ -25,7 +25,7 @@ export class AdminProductsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ){
-    this.productService.getAll({ order: { column: 'name', dir: 'asc'} })
+    this.productService.getAll({ order: { column: 'name', dir: 'asc'} }, true)
     .pipe(
       switchMap(products => {
         this.initializeTable(products);

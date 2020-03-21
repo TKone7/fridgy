@@ -17,7 +17,10 @@
     *ngIf="product"
     [show-actions]="true">
 </product-card>
-<inventory-record *ngIf="true"></inventory-record>
+<inventory-record
+    *ngFor="let item of fridgeEntries"
+    (remove)="remove($event)"
+    [item]="item"></inventory-record>
 
 <button (click)="scanSuccessHandler('8710447484326')" class="btn btn-primary">fake scan</button>
 <button (click)="scanSuccessHandler('874410447484326')" class="btn btn-primary">fake scan unknown</button>

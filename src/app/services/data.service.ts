@@ -3,7 +3,7 @@ import { Query } from './../models/query';
 import { TokenExpiredError } from './../common/token-expired-error';
 import { UnauthorizedError } from './../common/unauthorized-error';
 import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
-import { catchError, retry, map, shareReplay } from 'rxjs/operators';
+import { catchError, retry, map, shareReplay, filter } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { AppError } from '../common/app-error';
 import { Injectable } from '@angular/core';
@@ -40,7 +40,6 @@ export class DataService<T> {
   }
 
   getAll(query?: Query, forceRefresh = false) {
-
     if (
       forceRefresh ||
       !this.cacheList ||
@@ -48,7 +47,8 @@ export class DataService<T> {
     ){
       let newExpiry = new Date().getTime() + this.expirationMs;
       let params = new HttpParams();
-      if (query) params = params.append('sort_by', query.order.column +  '.' + query.order.dir);
+      if (query && query.order) params = params.append('sort_by', query.order.column +  '.' + query.order.dir);
+      if (query && query.filter) params = params.append(query.filter.field, query.filter.value);
       let res = this.http.get<T[]>(this.url, {params}).pipe(
         shareReplay(1),
         catchError(this.handleError)

@@ -42,6 +42,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { FridgeContentComponent } from './fridge/fridge-content/fridge-content.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ProductService,
     UserService,
     FridgeService,
+    DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useExisting: JwtInterceptor,

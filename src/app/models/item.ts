@@ -5,7 +5,7 @@ export interface Item {
     fridge: string;
     barcode: string;
     product?: Product;
-    created?: Date;
+    created?: string;
     expiry?: Date;
     qty: number;
 }

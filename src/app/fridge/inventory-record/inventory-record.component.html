@@ -1,18 +1,19 @@
 <div class="card-footer">
     <div class="row">
         <div class="col-3 data-field">
-            <small>Added:<br> <b>23.03.20</b> </small> <br>
+            <small>Added:<br> <b>{{ item.created }}</b> </small> <br>
         </div>
         <div class="col-3 data-field alert alert-warning">
-            <small>Expires: <br> <b>3.05.20</b></small>
+            <small>Expires: <br> <b>{{ (item?.expiry || 'no expiry')}}</b></small>
         </div>
         <div class="col data-field">
-            <h5>5 items</h5>
-            <small>=200 ml</small>
+            <h5>{{item.qty}} items</h5>
+            <small>=calc ml</small>
         </div>
         
         <div class="col-3 data-field">
             <button 
+                (click)="remove()"
                 class="btn btn-danger btn-block">
                 <span aria-hidden="true">&times;</span>
             </button>

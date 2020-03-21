@@ -26,15 +26,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.dummyService.getAll().subscribe(r => {
-      this.data = r['msg'];
-    },
-    (e: Error) => {
-      if (e instanceof UnauthorizedError){
-        this.data = 'You cannot see the dummy data since you are not logged in.';
-      }
-      else throw e;
-    });
   }
 
   ngOnDestroy(): void {
