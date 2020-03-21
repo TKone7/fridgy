@@ -10,6 +10,6 @@ import { Injectable } from '@angular/core';
 export class CategoryService extends DataService<Category> {
 
   constructor(http: HttpClient) {
-    super(environment.baseUrl + '/categories', http);
+    super(environment.baseUrl + '/categories', http, 24 * 60 * 60 * 1000);
   }
 }

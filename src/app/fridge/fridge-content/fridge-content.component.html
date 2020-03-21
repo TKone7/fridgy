@@ -1,0 +1,16 @@
+
+<div *ngIf="currentFridge; else noFridge">
+    <h5>
+    {{ currentFridge.name }}
+    </h5>
+    <ul>
+        <li *ngFor="let item of items"> {{ item.barcode }}: {{ item.qty }}: {{ item.product?.name }} </li>
+    </ul>
+
+</div>
+
+<ng-template #noFridge>
+    <div>
+        Please chose a fridge to show its content here!
+    </div>    
+</ng-template>

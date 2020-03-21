@@ -13,7 +13,7 @@
     <div [ngbCollapse]="!isShown" class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a (click)="toggleBurger()" class="nav-link" routerLink="/shopping-cart">Shopping-Cart</a>
+          <a (click)="toggleBurger()" class="nav-link" routerLink="/products">Products</a>
         </li>
         <li class="nav-item">
           <a (click)="toggleBurger()" class="nav-link" routerLink="/scanner">Scanner</a>
@@ -28,6 +28,26 @@
             </a>
           </li>
         </ng-template>
+        <li *ngIf="currentUser" ngbDropdown class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link" id="dropdown00" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            MyFridges
+          </a>
+          <div
+            ngbDropdownMenu
+            class="dropdown-menu"
+            aria-labelledby="dropdown00">
+
+            <a
+              *ngFor="let fridge of fridges;"
+              (click)="activateFridge(fridge)"
+              ngbDropdownItem class="dropdown-item"
+              >{{fridge.name}}
+              <fa *ngIf="fridge?.id === (currentFridge$ | async)?.id" name="check" size="s"></fa>
+            </a>
+            <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/users">add new...</a>
+            
+          </div>
+        </li>
         <li *ngIf="currentUser; else anonymousUser" ngbDropdown class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ currentUser.displayname }}
@@ -37,10 +57,8 @@
             ngbDropdownMenu
             class="dropdown-menu"
             aria-labelledby="dropdown01">
-            <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/my/orders">My Orders</a>
 
             <ng-container *ngIf="currentUser.isadmin">
-              <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
               <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/products">Manage Products</a>
               <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/users">Manage Users</a>
             </ng-container>

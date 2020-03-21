@@ -89,7 +89,7 @@ export class AuthService {
 
     logoutSubject.subscribe(() => {
       delRefreshToken.subscribe(() => {
-        this.setUser(null,null);
+        this.setUser(null, null);
         this.setAccessToken(null);
         this.setRefreshToken(null);
         this.currentUserSubject.next(null);

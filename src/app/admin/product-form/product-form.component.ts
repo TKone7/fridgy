@@ -48,7 +48,7 @@ export class ProductFormComponent implements OnInit {
       
       // snapshot is good enough, cause the content of component cannot be loaded dynamically
       this.existingBarcode = this.route.snapshot.paramMap.get('barcode');
-      if (this.existingBarcode) this.productService.get(this.existingBarcode)
+      if (this.existingBarcode) this.productService.get(this.existingBarcode, true)
         .pipe(take(1))
         .subscribe(p => {
           if (p.nutrient) this.addNutritionForm();

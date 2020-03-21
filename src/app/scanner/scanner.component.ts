@@ -1,3 +1,7 @@
+import { Item } from './../models/item';
+import { Fridge } from './../models/fridge';
+import { ItemService } from './../services/item.service';
+import { FridgeService } from './../services/fridge.service';
 import { AuthService } from './../services/auth.service';
 import { User } from './../models/user';
 import { NotFoundError } from './../common/not-found-error';
@@ -18,6 +22,7 @@ export class ScannerComponent implements OnInit {
   currentUser: User;
   event: string;
   product: Product;
+  currentFridge: Fridge;
   fridgeEntries: any;
   showAddProduct = false;
 
@@ -50,6 +55,15 @@ export class ScannerComponent implements OnInit {
     this.router.navigate(['/admin/products/new'], { queryParams: { barcode: this.event }});
   }
 
+  addToFridge() {
+    let newItem: Item = {
+      barcode: this.product.barcode,
+      fridge: this.currentFridge.id,
+      qty: 1
+    };
+    this.itemService.create(newItem).subscribe();
+  }
+
   get scanningInProgress(): boolean {
     return (!this.showAddProduct && !this.product);
   }
@@ -57,10 +71,15 @@ export class ScannerComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private fridgeService: FridgeService,
+    private itemService: ItemService
   ) {
     this.currentUser = this.authService.currentUserValue;
-
+    this.fridgeService.currentFridge.subscribe(fridge => {
+      this.currentFridge = fridge;
+      this.itemService.initFridge(fridge.id);
+    });
   }
 
   ngOnInit() {

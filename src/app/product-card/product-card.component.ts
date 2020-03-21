@@ -10,12 +10,15 @@ export class ProductCardComponent {
   @Input('product') product: Product;
   @Input('show-actions') showActions = true;
   @Output() close = new EventEmitter();
+  @Output('add') addEmitter = new EventEmitter();
+
   @Output() edit = new EventEmitter<Product>();
 
 
   constructor() { }
 
-  addToCart(product: Product) {
+  add() {
+    this.addEmitter.emit();
     // work with services to not give this component too much responsibility
     // this.whateverService.add(product);
   }

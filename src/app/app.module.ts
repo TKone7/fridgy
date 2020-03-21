@@ -1,3 +1,4 @@
+import { FridgeService } from './services/fridge.service';
 import { UserService } from './services/user.service';
 import { ScannerComponent } from './scanner/scanner.component';
 import { ProductService } from './services/product.service';
@@ -39,7 +40,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { InventoryRecordComponent } from './fridge/inventory-record/inventory-record.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
-
+import { FridgeContentComponent } from './fridge/fridge-content/fridge-content.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
     ProductCardComponent,
     InventoryRecordComponent,
     RegisterComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    FridgeContentComponent
   ],
   imports: [
     NgbModule,
@@ -76,6 +79,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
     MatPaginatorModule,
     MatSortModule,
     MatButtonModule,
+    AngularFontAwesomeModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: AuthService.getAccessToken,
@@ -93,6 +97,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
     CategoryService,
     ProductService,
     UserService,
+    FridgeService,
     {
       provide: HTTP_INTERCEPTORS,
       useExisting: JwtInterceptor,

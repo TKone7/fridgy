@@ -14,7 +14,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class AdminProductsComponent implements OnInit {
   query: string;
-  columnsToDisplay = ['name', 'barcode', 'edit'];
+  columnsToDisplay = ['name', 'description', 'barcode', 'edit'];
   dataSource: MatTableDataSource<Product>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

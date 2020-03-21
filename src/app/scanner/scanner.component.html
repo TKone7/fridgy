@@ -12,11 +12,12 @@
 <product-card
     (close)="contScanning()"
     (edit)="editProduct($event)"
+    (add)="addToFridge()"
     [product]="product"
     *ngIf="product"
     [show-actions]="true">
 </product-card>
-<inventory-record *ngIf="fridgeEntries"></inventory-record>
+<inventory-record *ngIf="true"></inventory-record>
 
 <button (click)="scanSuccessHandler('8710447484326')" class="btn btn-primary">fake scan</button>
 <button (click)="scanSuccessHandler('874410447484326')" class="btn btn-primary">fake scan unknown</button>
