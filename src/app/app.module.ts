@@ -1,3 +1,4 @@
+import { FridgeManagerService } from './fridge-manager.service';
 import { FridgeService } from './services/fridge.service';
 import { UserService } from './services/user.service';
 import { ScannerComponent } from './scanner/scanner.component';
@@ -31,6 +32,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ProductMainComponent } from './admin/product-main/product-main.component';
 import { ProductNutrientComponent } from './admin/product-nutrient/product-nutrient.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -43,6 +45,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { FridgeContentComponent } from './fridge/fridge-content/fridge-content.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DatePipe } from '@angular/common';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,8 @@ import { DatePipe } from '@angular/common';
     MatPaginatorModule,
     MatSortModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AngularFontAwesomeModule,
     JwtModule.forRoot({
       config: {
@@ -99,6 +104,7 @@ import { DatePipe } from '@angular/common';
     ProductService,
     UserService,
     FridgeService,
+    FridgeManagerService,
     DatePipe,
     {
       provide: HTTP_INTERCEPTORS,

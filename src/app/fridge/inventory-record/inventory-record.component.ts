@@ -1,5 +1,5 @@
 import { Item } from './../../models/item';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'inventory-record',
@@ -8,9 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class InventoryRecordComponent implements OnInit {
   @Input('item') item: Item;
-
   @Output('remove') removeEmitter: EventEmitter<Item> = new EventEmitter();
-
 
   constructor() { }
 
