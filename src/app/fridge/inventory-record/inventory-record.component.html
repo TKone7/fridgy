@@ -9,13 +9,12 @@
                     [(ngModel)]="item.expiry"
                     matInput
                     [matDatepicker]="picker"
-                    type="button"
                     (click)="picker.open()"
+                    (dateChange)="updateDate($event)"
                     class="btn btn-outline-dark"
+                    placeholder="no expiry"
                     >
                 <mat-datepicker touchUi #picker></mat-datepicker>
-
-                    
             </small>
         </div>
         <div class="col data-field">

@@ -10,7 +10,7 @@ import { AuthService } from './services/auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -24,7 +24,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RefreshTokenInterceptor } from './refresh-token-interceptor';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 // import { CustomFormsModule } from 'ng2-validation';
@@ -45,6 +45,9 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { FridgeContentComponent } from './fridge/fridge-content/fridge-content.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DatePipe } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
@@ -69,7 +72,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     InventoryRecordComponent,
     RegisterComponent,
     AdminUsersComponent,
-    FridgeContentComponent
+    FridgeContentComponent,
   ],
   imports: [
     NgbModule,
@@ -84,8 +87,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSortModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule,
     AngularFontAwesomeModule,
+
+    MatNativeDateModule,
+
     JwtModule.forRoot({
       config: {
         tokenGetter: AuthService.getAccessToken,

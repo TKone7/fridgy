@@ -6,6 +6,6 @@ export interface Item {
     barcode: string;
     product?: Product;
     created?: string;
-    expiry?: Date;
+    expiry?: string;
     qty: number;
 }

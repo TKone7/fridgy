@@ -18,5 +18,5 @@ div.col {
 
 .btn {
     font-size: inherit;
-    padding: 0.375rem 0.375rem;
+    max-width: 70px;
 }
