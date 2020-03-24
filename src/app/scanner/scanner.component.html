@@ -14,8 +14,10 @@
     (edit)="editProduct($event)"
     (add)="addToFridge()"
     [product]="product"
+    [items]="fridgeEntries"
+    [show-actions]="true"
     *ngIf="product"
-    [show-actions]="true">
+    >
 </product-card>
 <inventory-record
     *ngFor="let item of fridgeEntries"

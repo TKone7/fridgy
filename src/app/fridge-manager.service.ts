@@ -22,14 +22,14 @@ export class FridgeManagerService {
 
 
   async addItem(product: Product) {
-    let item = await this.getCurrentItem(product);
-    if (item){
-      item.qty++;
-      await this.itemService.update(item.id, item).toPromise();
-    } else{
+    // let item = await this.getCurrentItem(product);
+    // if (item){
+    //   item.qty++;
+    //   await this.itemService.update(item.id, item).toPromise();
+    // } else{
       let newItem = this.createNewItem(product);
       await this.itemService.create(newItem).toPromise();
-    }
+    // }
   }
 
     private async getCurrentItem(product: Product) {

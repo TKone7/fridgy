@@ -1,3 +1,4 @@
+import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,14 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-users.component.css']
 })
 export class AdminUsersComponent implements OnInit {
-  users: any[];
+  users: User[];
 
   constructor(
     private userService: UserService
   ) { }
 
   changeAdmin(userId) {
-    const user = this.users.find(u => u.id === userId);
+    const user = this.users.find(u => u.uuid === userId);
     this.userService.update(userId, user).subscribe();
   }
 
@@ -22,7 +23,7 @@ export class AdminUsersComponent implements OnInit {
     if (!confirm('Are you sure you want to delete this user')) return;
 
     this.userService.delete(userId).subscribe(r => {
-      this.users = this.users.filter(user => user.id !== userId);
+      this.users = this.users.filter(user => user.uuid !== userId);
     });
 
   }

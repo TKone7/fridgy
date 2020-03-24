@@ -23,13 +23,32 @@
         <p class="card-text">{{ product.qty }} {{ product.qty_type }}</p>
     </div>
     <div *ngIf="showActions" class="card-footer">
-        <div class="row">
-            <div class="col">
-                <button 
-                    (click)="add()"
-                    class="btn btn-primary btn-block">Add to Fridge
-                </button>
+        <button 
+            *ngIf="qty === 0.0; else updateQuantity"
+            (click)="add()"
+            class="btn btn-primary btn-block">
+            Add to Fridge
+        </button>
+        <ng-template #updateQuantity>
+            <div class="row no-gutters">
+                <div class="col-2">
+                    <button 
+                        (click)="add()"
+                        class="btn btn-secondary btn-block">
+                        -
+                    </button>
+                </div>
+                <div class="col text-center">
+                    {{ qty | number:'1.0-1' }} items ~ {{ (qty * product.qty) | number:'1.0-0' }} {{ product.qty_type }}
+                </div>
+                <div class="col-2">
+                    <button 
+                        (click)="add()"
+                        class="btn btn-secondary btn-block">
+                        +
+                    </button>
+                </div>
             </div>
-        </div>
+        </ng-template>
     </div>
 </div>

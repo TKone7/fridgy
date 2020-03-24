@@ -40,7 +40,6 @@ export class ScannerComponent {
         }
           , (error: AppError) => {
             if (error instanceof NotFoundError) {
-              console.log('handled error');
               this.showAddProduct = true;
             } else {
               throw error;
@@ -52,13 +51,17 @@ export class ScannerComponent {
     this.itemService.getAll({filter: {field: 'barcode', value: product.barcode}})
     .subscribe(items => {
       this.fridgeEntries = items;
+      this.fridgeEntries.forEach(entry => {
+        entry.product = product;
+      });
     });
   }
 
   remove(item: Item){
     this.itemService.delete(item.id).subscribe(response => {
-      let index = this.fridgeEntries.indexOf(item);
-      this.fridgeEntries.splice(index, 1);
+      // let index = this.fridgeEntries.indexOf(item);
+      // use filter instead of splice to trigger ngOnChanges
+      this.fridgeEntries = this.fridgeEntries.filter(element => element.id !== item.id);
     });
   }
 
@@ -95,9 +98,11 @@ export class ScannerComponent {
     private fridgeManager: FridgeManagerService,
   ) {
     this.currentUser = this.authService.currentUserValue;
+
     this.fridgeService.currentFridge.subscribe(fridge => {
       this.currentFridge = fridge;
       this.itemService.initFridge(fridge.id);
+      if (this.product) this.loadItems(this.product);
     });
   }
 }

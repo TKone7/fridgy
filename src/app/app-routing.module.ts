@@ -36,17 +36,17 @@ const routes: Routes = [
   {
     path: 'admin/products/new',
     component: ProductFormComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
+    canActivate: [AuthGuard] //AdminAuthGuard
   },
   {
     path: 'admin/products/:barcode',
     component: ProductFormComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
+    canActivate: [AuthGuard] //AdminAuthGuard
   },
   {
     path: 'admin/products',
     component: AdminProductsComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
+    canActivate: [AuthGuard] //AdminAuthGuard
   },
   {
     path: 'admin/users',

@@ -4,22 +4,36 @@
             <small>Added:<br> <b>{{ item.created | date:'d. MMM' }}</b> </small> <br>
         </div>
         <div class="col-3 data-field">
-            <small>Expires: <br> 
+            <small>
+                <div *ngIf="item.expiry">
+                    <span *ngIf="daysUntilExpiry<0">Expired!</span>
+                    <span *ngIf="daysUntilExpiry==0">Expires today!</span>
+                    <span *ngIf="daysUntilExpiry==1">Expires tomorrow!</span>
+                    <span *ngIf="daysUntilExpiry>1">Expires in {{daysUntilExpiry}}d</span>                    
+                </div>
                 <input
                     [(ngModel)]="item.expiry"
                     matInput
                     [matDatepicker]="picker"
                     (click)="picker.open()"
                     (dateChange)="updateDate($event)"
-                    class="btn btn-outline-dark"
+                    class="btn"
                     placeholder="no expiry"
+                    readonly
+                    [ngClass]="{
+                        'btn-outline-dark': daysUntilExpiry > 5 || !item.expiry,
+                        'btn-warning': daysUntilExpiry <= 5 && daysUntilExpiry > 1,
+                        'btn-danger': daysUntilExpiry <= 1 && item.expiry
+                    }"
                     >
                 <mat-datepicker touchUi #picker></mat-datepicker>
             </small>
         </div>
         <div class="col data-field">
-            <h5>{{item.qty}} items</h5>
-            <small>=calc ml</small>
+            <small>
+                <b style="display: block;" >{{ (item.qty * item.product.qty) | number:'1.0-0' }} {{ item.product.qty_type }}</b>
+                ({{ (item.qty * 100) | number:'1.0-1' }}%)
+            </small>
         </div>
         
         <div class="col-3 data-field">

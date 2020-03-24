@@ -1,7 +1,7 @@
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { ItemService } from './../../services/item.service';
 import { Item } from './../../models/item';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 
 import * as _moment from 'moment';
@@ -41,9 +41,11 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class InventoryRecordComponent implements OnInit {
+export class InventoryRecordComponent implements OnInit, OnChanges {
   @Input('item') item: Item;
   @Output('remove') removeEmitter: EventEmitter<Item> = new EventEmitter();
+
+  daysUntilExpiry: number;
 
   constructor(
     private itemService: ItemService
@@ -53,12 +55,26 @@ export class InventoryRecordComponent implements OnInit {
     this.removeEmitter.emit(this.item);
   }
 
+  ngOnChanges() {
+    this.calcDaysUntilExpiry();
+  }
+
+  private calcDaysUntilExpiry() {
+    let exp = new Date(this.item.expiry);
+    let today = new Date();
+    let diffc = exp.getTime() - today.getTime();
+    let days = Math.ceil(diffc / (1000 * 60 * 60 * 24));
+    this.daysUntilExpiry =  days;
+  }
+
   updateDate(event) {
-    console.log(event);
     const momentDate = new Date(this.item.expiry);
     this.item.expiry = _moment(momentDate).format('YYYY-MM-DD');
+    let product = this.item.product;
     this.itemService.update(this.item.id, this.item).subscribe(item => {
       this.item = item;
+      this.item.product = product;
+      this.calcDaysUntilExpiry();
     });
   }
 
