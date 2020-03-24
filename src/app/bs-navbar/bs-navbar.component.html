@@ -30,7 +30,12 @@
         </ng-template>
         <li *ngIf="currentUser" ngbDropdown class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link" id="dropdown00" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            MyFridges
+            <ng-container *ngIf="(currentFridge$ | async); else select">
+              Fridge: {{ (currentFridge$ | async)?.name }}
+            </ng-container>
+            <ng-template #select>
+              Select...
+            </ng-template>
           </a>
           <div
             ngbDropdownMenu

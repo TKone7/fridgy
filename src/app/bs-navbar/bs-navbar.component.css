@@ -1,3 +1,11 @@
+
+@media screen and (min-width: 768px) {
+    a.edit {
+        visibility: hidden ;
+    }
+}
+
+
 .dropdown-toggle, .dropdown-item {
     cursor: pointer;
 }
@@ -6,7 +14,7 @@ a.edit {
     padding-top: 0.25rem;
     padding-right: 10px;
     float: right;
-    visibility: hidden;
+    /* visibility: hidden; */
     cursor: pointer;
 }
 
@@ -40,3 +48,4 @@ span.addNew{
     background-color: transparent;
     border: 0;
 }
+
