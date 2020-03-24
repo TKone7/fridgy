@@ -1,3 +1,42 @@
 .dropdown-toggle, .dropdown-item {
     cursor: pointer;
 }
+
+a.edit {
+    padding-top: 0.25rem;
+    padding-right: 10px;
+    float: right;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+a.fridge-link {
+    display: inline-block;
+    width: 75%;
+}
+
+span.fridge {
+    display: block;
+}
+
+span.fridge:hover a.edit {
+    visibility: visible;
+}
+
+span.fridge:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #007bff;
+}
+span.addNew{
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color:#212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}

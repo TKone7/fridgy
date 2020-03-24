@@ -14,6 +14,7 @@ import { User } from '../models/user';
 export class BsNavbarComponent implements OnInit {
   currentUser: User;
   isShown = false;
+  showAddFridgeName = false;
   fridges: Fridge[] = [];
   currentFridge$: Observable<Fridge>;
 
@@ -39,6 +40,17 @@ export class BsNavbarComponent implements OnInit {
     this.toggleBurger();
     this.fridgeService.setFridgeToLocal(fridge);
     console.log('tolocal: ', fridge);
+  }
+  editFridge(fridge: Fridge){
+    this.toggleBurger();
+    this.router.navigate(['/fridge', fridge.id]);
+  }
+  addFridge(fridgeName: HTMLInputElement){
+    let newFridge: Fridge = {name: fridgeName.value};
+    this.fridgeService.create(newFridge).subscribe(fridge => {
+      this.fridges.push(fridge);
+      fridgeName.value = '';
+    });
   }
   toggleBurger(){
     this.isShown = !this.isShown;

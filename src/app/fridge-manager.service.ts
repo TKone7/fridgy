@@ -1,3 +1,6 @@
+import { User } from './models/user';
+import { switchMap } from 'rxjs/operators';
+import { UserService } from './services/user.service';
 import { FridgeService } from './services/fridge.service';
 import { Product } from './models/product';
 import { Item } from './models/item';
@@ -13,6 +16,7 @@ export class FridgeManagerService {
   constructor(
     private itemService: ItemService,
     private fridgeService: FridgeService,
+    private userService: UserService,
     private datePipe: DatePipe
   ) { }
 
@@ -41,5 +45,18 @@ export class FridgeManagerService {
         fridge: this.fridgeService.currentFridgeValue.id,
         qty: 1
       };
+    }
+
+    addOwner(fridgeId: string, ownerEmail: string) {
+      return this.userService.getByEmail(ownerEmail)
+        .pipe(
+          switchMap(user => {
+            return this.fridgeService.addOwner(fridgeId, user);
+          })
+        );
+    }
+
+    removeOwner(fridgeId: string, owner: User){
+      return this.fridgeService.removeOwner(fridgeId, owner.uuid);
     }
 }

@@ -2,7 +2,8 @@ import { User } from './user';
 import { Product } from './product';
 
 export interface Fridge {
-    id: string;
+    id?: string;
     name: string;
-    owners?: User[];
+    owner?: User[];
+    creator?: User;
 }

@@ -1,3 +1,4 @@
+import { User } from './../models/user';
 import { Item } from './../models/item';
 import { Fridge } from './../models/fridge';
 import { environment } from './../../environments/environment';
@@ -29,6 +30,14 @@ export class FridgeService extends DataService<Fridge> {
 
   public get currentFridgeValue(): Fridge {
     return this.currentFridgeSubject.value;
+  }
+
+  addOwner(fridgeId: string, owner: User) {
+    return this.http.post<Fridge>(this.url + '/' + fridgeId + '/owners', JSON.stringify(owner), this.httpOptions);
+  }
+
+  removeOwner(fridgeId: string, ownerId: string) {
+    return this.http.delete<Fridge>(this.url + '/' + fridgeId + '/owners/' + ownerId);
   }
 
   getFridgeFromLocal(){

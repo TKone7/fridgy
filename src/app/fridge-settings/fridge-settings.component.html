@@ -1,0 +1,15 @@
+<h3>{{ fridge?.name }}</h3>
+<form [formGroup]="form" >
+    <input formControlName="input" type="text" class="form-control"
+    (keyup.enter)="addUser(email)" #email placeholder="example@email.com">
+    <ul class="list-group">
+        <li class="list-group-item" >
+            {{ creator.value }}
+        </li>
+        <li *ngFor="let member of members.controls" class="list-group-item" >
+            {{ member.value }}
+            <button
+                (click)="removeUser(member)" type="button" class="btn btn-outline-danger">Remove</button>
+        </li>
+    </ul>
+</form>

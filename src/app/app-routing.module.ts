@@ -1,3 +1,4 @@
+import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.component';
 import { FridgeContentComponent } from './fridge/fridge-content/fridge-content.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { RegisterComponent } from './register/register.component';
@@ -24,6 +25,10 @@ const routes: Routes = [
   { path: 'register', component:  RegisterComponent},
   { path: 'scanner', component: ScannerComponent},
   {
+    path: 'fridge/:fridgeId',
+    component: FridgeSettingsComponent,
+    canActivate: [AuthGuard]
+  },{
     path: 'fridge',
     component: FridgeContentComponent,
     canActivate: [AuthGuard]

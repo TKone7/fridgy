@@ -49,6 +49,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     RegisterComponent,
     AdminUsersComponent,
     FridgeContentComponent,
+    FridgeSettingsComponent,
   ],
   imports: [
     NgbModule,

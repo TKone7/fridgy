@@ -36,16 +36,23 @@
             ngbDropdownMenu
             class="dropdown-menu"
             aria-labelledby="dropdown00">
-
-            <a
-              *ngFor="let fridge of fridges;"
-              (click)="activateFridge(fridge)"
-              ngbDropdownItem class="dropdown-item"
-              >{{fridge.name}}
-              <fa *ngIf="fridge?.id === (currentFridge$ | async)?.id" name="check" size="s"></fa>
-            </a>
-            <a (click)="toggleBurger()" ngbDropdownItem class="dropdown-item" routerLink="/admin/users">add new...</a>
-            
+            <span class="fridge" *ngFor="let fridge of fridges;">
+              <a
+                (click)="activateFridge(fridge)"
+                ngbDropdownItem class="dropdown-item fridge-link"
+                >{{fridge.name}}
+                <fa *ngIf="fridge?.id === (currentFridge$ | async)?.id" name="check" size="s"></fa>
+              </a>
+              <a
+                class="edit"
+                (click)="editFridge(fridge)">
+                <fa name="cog" animation="spin" size="s"></fa>
+              </a>
+            </span>
+            <span class="fridge addNew" *ngIf="!showAddFridgeName" (click)="$event.stopPropagation(); showAddFridgeName = !showAddFridgeName">add new...</span>
+            <span class="fridge addNew" *ngIf="showAddFridgeName">
+              <input #fridgeName (keyup.enter)="addFridge(fridgeName)" type="text">
+            </span>
           </div>
         </li>
         <li *ngIf="currentUser; else anonymousUser" ngbDropdown class="nav-item dropdown">
