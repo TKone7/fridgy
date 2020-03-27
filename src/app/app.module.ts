@@ -30,6 +30,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 // import { CustomFormsModule } from 'ng2-validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import {MatSliderModule} from '@angular/material/slider';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -47,6 +48,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatCardModule} from '@angular/material/card'; 
 import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.component';
 import { ScanActionComponent } from './scan-action/scan-action.component';
 
@@ -90,6 +93,9 @@ import { ScanActionComponent } from './scan-action/scan-action.component';
     MatButtonModule,
     MatIconModule,
     MatDatepickerModule,
+    MatGridListModule,
+    MatSliderModule,
+    MatCardModule,
     AngularFontAwesomeModule,
 
     MatNativeDateModule,

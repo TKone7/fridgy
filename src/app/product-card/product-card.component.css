@@ -1,4 +1,4 @@
-
+/* 
 .card-footer {
     padding: 0;
 }
@@ -27,4 +27,28 @@ button.close {
 
 .card-title {
     text-align: center;
+} */
+
+.crop {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+.crop img {
+    display:block; /*remove inline-block spaces*/
+    height: 100%; /*make image streatch*/
+    margin: auto;
+}
+.product-card {
+    margin-bottom: 10px;
+
+}
+
+.mat-fab.mat-fab-bottom-right {
+    top: auto;
+    right: 20px;
+    left: auto;
+    bottom: 20px;
+    position: absolute;
 }

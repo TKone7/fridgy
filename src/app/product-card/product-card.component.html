@@ -1,5 +1,4 @@
-<div  class="card" *ngIf="product.name">
-    
+<!-- <div  class="card" *ngIf="product.name">
     <div class="card-header">
         <div class="row">
             <div class="col-2">
@@ -51,4 +50,84 @@
             </div>
         </ng-template>
     </div>
-</div>
+</div> -->
+
+
+
+<mat-card class="product-card">
+<mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-subtitle>{{ product.description }} | {{ product.qty }} {{ product.qty_type }}</mat-card-subtitle>
+
+</mat-card-header>
+<mat-card-content *ngIf="product.imgurl">
+    <div #div class="crop" [ngStyle]="{'height.px': div.offsetWidth * 0.6 }">
+        <img [src]="product.imgurl" alt="Product" >
+    </div>
+</mat-card-content>
+
+<button *ngIf="showActions" (click)="add()" color="primary" class="mat-fab-bottom-right" mat-fab>
+    <mat-icon class="icon">add</mat-icon>
+</button>
+
+<mat-card-actions>
+    <button (click)="editCard()" mat-button>EDIT</button>
+    <button (click)="add()"  *ngIf="showActions" mat-button>ADD</button>
+</mat-card-actions>
+
+</mat-card>
+  
+
+  <!-- <div  class="card" *ngIf="product.name">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-2">
+                <button (click)="editCard()" type="button" class="btn btn-outline-secondary" style="text-align: left;">Edit</button>
+            </div>
+            <div class="col">
+                <h5 class="card-title">{{ product.name }}</h5>
+            </div>
+            <div class="col-2">
+                <button *ngIf="showActions" type="button" class="close" aria-label="Close" (click)="closeCard()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <img [src]="product.imgurl" class="card-img-top" *ngIf="product.imgurl" style="max-width: 250px;"> -->
+    <!-- <div class="card-body">
+        <p class="card-text">{{ product.barcode }}</p>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text">{{ product.qty }} {{ product.qty_type }}</p>
+    </div> -->
+    <!-- <div *ngIf="showActions" class="card-footer">
+        <button 
+            *ngIf="qty === 0.0; else updateQuantity"
+            (click)="add()"
+            class="btn btn-primary btn-block">
+            Add to Fridge
+        </button>
+        <ng-template #updateQuantity>
+            <div class="row no-gutters">
+                <div class="col-2">
+                    <button 
+                        (click)="add()"
+                        class="btn btn-secondary btn-block">
+                        -
+                    </button>
+                </div>
+                <div class="col text-center">
+                    {{ qty | number:'1.0-1' }} items ~ {{ (qty * product.qty) | number:'1.0-0' }} {{ product.qty_type }}
+                </div>
+                <div class="col-2">
+                    <button 
+                        (click)="add()"
+                        class="btn btn-secondary btn-block">
+                        +
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+    </div> -->
+<!-- </div> -->

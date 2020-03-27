@@ -1,4 +1,71 @@
-<div class="card-footer">
+<mat-card class="item-card">
+    <mat-grid-list cols="4" colHeight="80px">
+        <mat-grid-tile>
+            <small>Added:<br> <b>{{ item.created | date:'d. MMM' }}</b> </small>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <small>
+                <div *ngIf="item.expiry">
+                    <span *ngIf="daysUntilExpiry<0">Expired!</span>
+                    <span *ngIf="daysUntilExpiry==0">Expires today!</span>
+                    <span *ngIf="daysUntilExpiry==1">Expires tomorrow!</span>
+                    <span *ngIf="daysUntilExpiry>1">Expires in {{daysUntilExpiry}}d</span>                    
+                </div>
+                <input
+                    [(ngModel)]="item.expiry"
+                    matInput
+                    [matDatepicker]="picker"
+                    (click)="picker.open()"
+                    (dateChange)="updateDate($event)"
+                    class="btn"
+                    placeholder="no expiry"
+                    readonly
+                    [ngClass]="{
+                        'btn-outline-dark': daysUntilExpiry > 5 || !item.expiry,
+                        'btn-warning': daysUntilExpiry <= 5 && daysUntilExpiry > 1,
+                        'btn-danger': daysUntilExpiry <= 1 && item.expiry
+                    }"
+                    >
+                <mat-datepicker touchUi #picker></mat-datepicker>
+            </small>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <small style="text-align: center;">
+                <b style="display: block;" >{{ (item.qty * item.product.qty) | number:'1.0-0' }} {{ item.product.qty_type }}</b>
+                ({{ (item.qty * 100) | number:'1.0-1' }}%)
+            </small>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="mat-btn-box">
+                <button 
+                mat-flat-button
+                color="warn"
+                (click)="remove()"
+                class="btn-block">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <button 
+                *ngIf="item.product.qty_type === 'pieces'"
+                mat-flat-button
+                color="accent"
+                (click)="reduce()"
+                class="btn-block">
+                <span aria-hidden="true">-1</span>
+            </button>
+            </div>
+            
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div
+        *ngIf="item.product.qty_type != 'pieces'"
+        class="row">
+        <mat-slider min="0" max="1" step="0.01" [(ngModel)]="item.qty" (change)="sliderChange()"></mat-slider>
+    </div>
+</mat-card>
+
+
+<!-- <div class="card-footer">
     <div class="row">
         <div class="col-3 data-field">
             <small>Added:<br> <b>{{ item.created | date:'d. MMM' }}</b> </small> <br>
@@ -43,21 +110,12 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <button 
+                *ngIf="item.product.qty_type === 'pieces'"
                 (click)="reduce()"
                 class="btn btn-outline-danger btn-block">
                 <span aria-hidden="true">-1</span>
             </button>
         </div>
     </div>
-    <!-- <div class="row">
-
-        
-{{ ((item?.expiry | date:'d. MMM') || 'set expiry')}}
-                </input>
-
-        <div class="col">
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-<p>Value: <span id="demo"></span></p>
-        </div>
-    </div> -->
-</div>
+    
+</div> -->

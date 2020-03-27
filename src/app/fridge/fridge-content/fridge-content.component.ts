@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ItemService } from './../../services/item.service';
 import { Item } from './../../models/item';
 import { ProductService } from './../../services/product.service';
@@ -22,7 +23,8 @@ export class FridgeContentComponent implements OnInit {
   constructor(
     private fridgeService: FridgeService,
     private itemService: ItemService,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) {
     this.fridgeService.currentFridge.pipe(
       switchMap(fridge => {
@@ -44,7 +46,9 @@ export class FridgeContentComponent implements OnInit {
     });
    }
 
+  goToScan() {
+    this.router.navigate(['/scanner']);
+  }
   ngOnInit() {
   }
-
 }

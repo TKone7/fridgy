@@ -31,18 +31,19 @@
 <inventory-record
     *ngFor="let item of fridgeEntries"
     (remove)="remove($event)"
-    (reduce)="reduce($event)"
+    (update)="update($event)"
     [item]="item"></inventory-record>
 
-<button (click)="scanSuccessHandler('7613404113745')" class="btn btn-primary">Scan Eggs</button>
-<button (click)="scanSuccessHandler('2104816004455')" class="btn btn-primary">fake scan unknown</button>
+<button mat-raised-button (click)="scanSuccessHandler('7613404113745')" >Scan Eggs</button>
+<button mat-raised-button (click)="scanSuccessHandler('2104816004455')" >fake scan unknown</button>
 
 
 <zxing-scanner
     [ngStyle]="{
-        'visibility': scanningInProgress ? 'inherit' : 'hidden'
+        'visibility': (scanningInProgress && currentFridge) ? 'inherit' : 'hidden'
     }"
     [formats]="['EAN_13']"
     (scanSuccess)="scanSuccessHandler($event)"
     >
 </zxing-scanner>
+<scan-action *ngIf="!scanningInProgress && currentFridge" (click)="contScanning()"></scan-action>

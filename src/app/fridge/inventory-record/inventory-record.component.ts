@@ -44,7 +44,7 @@ export const MY_FORMATS = {
 export class InventoryRecordComponent implements OnInit, OnChanges {
   @Input('item') item: Item;
   @Output('remove') removeEmitter: EventEmitter<Item> = new EventEmitter();
-  @Output('reduce') reduceEmitter: EventEmitter<Item> = new EventEmitter();
+  @Output('update') updateEmitter: EventEmitter<Item> = new EventEmitter();
 
   daysUntilExpiry: number;
 
@@ -55,9 +55,21 @@ export class InventoryRecordComponent implements OnInit, OnChanges {
   remove(){
     this.removeEmitter.emit(this.item);
   }
+  update(){
+    this.updateEmitter.emit(this.item);
+  }
+
+  sliderChange(){
+    if (this.item.qty === 0) return this.remove();
+    this.update();
+  }
 
   reduce(){
-    this.reduceEmitter.emit(this.item);
+    this.item.qty -= 1 / this.item.product.qty;
+    if (Math.round(this.item.qty * 100) / 100 === 0.0)
+      this.remove();
+    else
+      this.update();
   }
 
   ngOnChanges() {

@@ -14,3 +14,5 @@
         Please chose a fridge to show its content here!
     </div>    
 </ng-template>
+
+<scan-action *ngIf="currentFridge" (click)="goToScan()"></scan-action>

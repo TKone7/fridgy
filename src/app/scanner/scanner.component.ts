@@ -2,7 +2,6 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { GepirSearchService } from './../services/gepir-search.service';
 import { Product } from './../models/product';
 import { FridgeManagerService } from './../fridge-manager.service';
-import { DatePipe } from '@angular/common';
 import { Item } from './../models/item';
 import { Fridge } from './../models/fridge';
 import { ItemService } from './../services/item.service';
@@ -67,22 +66,16 @@ export class ScannerComponent {
 
   remove(item: Item){
     this.itemService.delete(item.id).subscribe(response => {
-      // let index = this.fridgeEntries.indexOf(item);
       // use filter instead of splice to trigger ngOnChanges
       this.fridgeEntries = this.fridgeEntries.filter(element => element.id !== item.id);
     });
   }
 
-  reduce(item: Item){
-    item.qty -= 1 / item.product.qty;
-    console.log('left: ', item.qty);
-    if (Math.round(item.qty * 100) / 100 === 0.0)
-      this.remove(item);
-    else
-      this.itemService.update(item.id, item).subscribe(() => {
-        this.fridgeEntries = this.fridgeEntries.filter(element => true);
-      }
-    );
+  update(item: Item){
+    this.itemService.update(item.id, item).subscribe(() => {
+      // set an empty filter to trigger ngOnChanges
+      this.fridgeEntries = this.fridgeEntries.filter(element => true);
+    });
   }
 
   contScanning() {
@@ -123,15 +116,15 @@ export class ScannerComponent {
     private fridgeService: FridgeService,
     private itemService: ItemService,
     private fridgeManager: FridgeManagerService,
-    private gepirService: GepirSearchService,
-    private fb: FormBuilder
   ) {
     this.currentUser = this.authService.currentUserValue;
 
     this.fridgeService.currentFridge.subscribe(fridge => {
-      this.currentFridge = fridge;
-      this.itemService.initFridge(fridge.id);
-      if (this.product) this.loadItems(this.product);
+      if (fridge) {
+        this.currentFridge = fridge;
+        this.itemService.initFridge(fridge.id);
+        if (this.product) this.loadItems(this.product);
+      }
     });
   }
 }

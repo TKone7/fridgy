@@ -29,3 +29,12 @@ div.col {
     -ms-user-select: none;
     user-select: none;
 }
+.mat-slider-horizontal{
+    width: 100%;
+}
+.mat-btn-box{
+    display: block;
+}
+.mat-card {
+    margin-bottom: 10px;
+}

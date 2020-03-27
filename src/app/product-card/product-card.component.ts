@@ -26,11 +26,12 @@ export class ProductCardComponent implements OnChanges {
     // this.whateverService.add(product);
   }
   ngOnChanges() {
-    console.log('change detect recalc');
     this.qty = this.getQuantity();
   }
   private getQuantity() {
     let qty = 0;
+    if (!this.items) return qty;
+
     this.items.forEach(element => {
       qty += element.qty;
     });
