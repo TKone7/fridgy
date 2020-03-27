@@ -76,6 +76,11 @@ export class FridgeSettingsComponent implements OnInit {
         this.members.controls.splice(index, 1);
       });
   }
+
+  removeFridge() {
+    this.fridgeService.delete(this.fridge.id).subscribe();
+  }
+
   ngOnInit() {
   }
 

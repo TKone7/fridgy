@@ -45,11 +45,10 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { FridgeContentComponent } from './fridge/fridge-content/fridge-content.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DatePipe } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.component';
+import { ScanActionComponent } from './scan-action/scan-action.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +74,7 @@ import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.compo
     AdminUsersComponent,
     FridgeContentComponent,
     FridgeSettingsComponent,
+    ScanActionComponent,
   ],
   imports: [
     NgbModule,
@@ -88,6 +88,7 @@ import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.compo
     MatPaginatorModule,
     MatSortModule,
     MatButtonModule,
+    MatIconModule,
     MatDatepickerModule,
     AngularFontAwesomeModule,
 

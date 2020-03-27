@@ -18,7 +18,6 @@ export class FridgeService extends DataService<Fridge> {
   private currentFridgeSubject: BehaviorSubject<Fridge>;
   public currentFridge: Observable<Fridge>;
 
-
   constructor(
     http: HttpClient
   ) {

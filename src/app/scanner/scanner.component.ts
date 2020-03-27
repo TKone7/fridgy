@@ -1,3 +1,5 @@
+import { FormBuilder, FormControl } from '@angular/forms';
+import { GepirSearchService } from './../services/gepir-search.service';
 import { Product } from './../models/product';
 import { FridgeManagerService } from './../fridge-manager.service';
 import { DatePipe } from '@angular/common';
@@ -5,7 +7,7 @@ import { Item } from './../models/item';
 import { Fridge } from './../models/fridge';
 import { ItemService } from './../services/item.service';
 import { FridgeService } from './../services/fridge.service';
-import { AuthService } from './../services/auth.service';
+import { AuthService, tokenUrl } from './../services/auth.service';
 import { User } from './../models/user';
 import { NotFoundError } from './../common/not-found-error';
 import { AppError } from './../common/app-error';
@@ -13,6 +15,7 @@ import { Router } from '@angular/router';
 import { take, switchMap } from 'rxjs/operators';
 import { ProductService } from './../services/product.service';
 import { Component} from '@angular/core';
+import { BarcodeValidators } from '../products/barcode.validators';
 
 @Component({
   selector: 'scanner',
@@ -22,6 +25,8 @@ import { Component} from '@angular/core';
 export class ScannerComponent {
   currentUser: User;
   event: string;
+  barcodeValidator =  {correctLength: true, validChecksum: true};
+  validBarcode = true;
   product: Product;
   currentFridge: Fridge;
   fridgeEntries: Item[] = [];
@@ -30,6 +35,9 @@ export class ScannerComponent {
   scanSuccessHandler(event){
     this.showAddProduct = false;
     this.event = event;
+    this.validateBarcode(event);
+    if (!this.validBarcode) return;
+
     this.productService.get(event)
         .pipe(
           take(1),
@@ -65,6 +73,18 @@ export class ScannerComponent {
     });
   }
 
+  reduce(item: Item){
+    item.qty -= 1 / item.product.qty;
+    console.log('left: ', item.qty);
+    if (Math.round(item.qty * 100) / 100 === 0.0)
+      this.remove(item);
+    else
+      this.itemService.update(item.id, item).subscribe(() => {
+        this.fridgeEntries = this.fridgeEntries.filter(element => true);
+      }
+    );
+  }
+
   contScanning() {
     this.showAddProduct = false;
     this.product = null;
@@ -89,6 +109,13 @@ export class ScannerComponent {
     return (!this.showAddProduct && !this.product);
   }
 
+  private validateBarcode(barcode: string){
+    this.barcodeValidator.correctLength = BarcodeValidators.correctLength(barcode);
+    this.barcodeValidator.validChecksum = BarcodeValidators.validChecksum(barcode);
+
+    this.validBarcode = (this.barcodeValidator.correctLength && this.barcodeValidator.validChecksum);
+  }
+
   constructor(
     private productService: ProductService,
     private router: Router,
@@ -96,6 +123,8 @@ export class ScannerComponent {
     private fridgeService: FridgeService,
     private itemService: ItemService,
     private fridgeManager: FridgeManagerService,
+    private gepirService: GepirSearchService,
+    private fb: FormBuilder
   ) {
     this.currentUser = this.authService.currentUserValue;
 

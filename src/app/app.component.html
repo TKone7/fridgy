@@ -2,7 +2,12 @@
 
 <main role="main" class="container">
 
-<router-outlet></router-outlet>
+<router-outlet>
+
+  <scan-action *ngIf="!onScanPage" (click)="goToScan()"></scan-action>
+
+</router-outlet>
+
 </main>
 
 <!-- <div class="starter-template">

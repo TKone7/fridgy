@@ -1,4 +1,13 @@
 
+<div *ngIf="!validBarcode" class="alert alert-warning">
+    <div *ngIf="!barcodeValidator.correctLength">
+        This barcode has not the right length! Please scan again.
+    </div>
+    <div *ngIf="!barcodeValidator.validChecksum">
+        This checksum is not valid! Please scan again.
+    </div>
+</div>
+
 <div *ngIf="showAddProduct" class="alert alert-primary justify-content-between" role="alert">
     <button type="button" class="close" aria-label="Close" (click)="showAddProduct = !showAddProduct">
         <span aria-hidden="true">&times;</span>
@@ -22,11 +31,12 @@
 <inventory-record
     *ngFor="let item of fridgeEntries"
     (remove)="remove($event)"
+    (reduce)="reduce($event)"
     [item]="item"></inventory-record>
 
-<button (click)="scanSuccessHandler('8710447484326')" class="btn btn-primary">fake scan</button>
-<button (click)="scanSuccessHandler('874410447484326')" class="btn btn-primary">fake scan unknown</button>
-<button *ngIf="!scanningInProgress" (click)="contScanning()" type="button" class="btn btn-success">Scan</button>
+<button (click)="scanSuccessHandler('7613404113745')" class="btn btn-primary">Scan Eggs</button>
+<button (click)="scanSuccessHandler('2104816004455')" class="btn btn-primary">fake scan unknown</button>
+
 
 <zxing-scanner
     [ngStyle]="{

@@ -18,4 +18,13 @@ export interface Product {
         protein?: number,
         salt?: number
     };
+    parties?: [{
+        name: string;
+        address: {
+          city: string,
+          postalCode: string,
+          street: string,
+          country: string
+        }
+      }];
 }
