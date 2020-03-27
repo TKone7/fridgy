@@ -71,8 +71,8 @@
 </button>
 
 <mat-card-actions>
+    <button (click)="add()" color="primary" *ngIf="showActions" mat-button>ADD</button>
     <button (click)="editCard()" mat-button>EDIT</button>
-    <button (click)="add()"  *ngIf="showActions" mat-button>ADD</button>
 </mat-card-actions>
 
 </mat-card>

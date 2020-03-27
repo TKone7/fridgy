@@ -46,6 +46,20 @@ export class FridgeContentComponent implements OnInit {
     });
    }
 
+  remove(item: Item){
+    this.itemService.delete(item.id).subscribe(response => {
+      // use filter instead of splice to trigger ngOnChanges
+      this.items = this.items.filter(element => element.id !== item.id);
+    });
+  }
+
+  update(item: Item){
+    this.itemService.update(item.id, item).subscribe(() => {
+      // set an empty filter to trigger ngOnChanges
+      this.items = this.items.filter(element => true);
+    });
+  }
+
   goToScan() {
     this.router.navigate(['/scanner']);
   }

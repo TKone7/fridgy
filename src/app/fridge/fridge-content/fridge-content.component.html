@@ -3,9 +3,17 @@
     <h5>
     {{ currentFridge.name }}
     </h5>
-    <ul>
+    
+    <inventory-record
+    *ngFor="let item of items"
+    (remove)="remove($event)"
+    (update)="update($event)"
+    [item]="item" [show-product]="true"></inventory-record>
+
+        
+    <!-- <ul>
         <li *ngFor="let item of items"> {{ item.barcode }}: {{ item.qty }}: {{ item.product?.name }} </li>
-    </ul>
+    </ul> -->
 
 </div>
 

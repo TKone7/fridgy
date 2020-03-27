@@ -38,3 +38,6 @@ div.col {
 .mat-card {
     margin-bottom: 10px;
 }
+.product-header-image {
+    background-size: cover;
+}

@@ -1,4 +1,19 @@
 <mat-card class="item-card">
+    <mat-card-header *ngIf="showProduct">
+        <div 
+            *ngIf="item.product?.imgurl"
+            [style.background-image]="'url(' + item.product.imgurl + ')'"
+            [style.background-size]="'cover'"
+            mat-card-avatar class="product-header-image">
+        </div>
+        <mat-card-title>
+            {{ item.product?.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ item.product?.description }}
+        </mat-card-subtitle>
+      </mat-card-header>
+    
     <mat-grid-list cols="4" colHeight="80px">
         <mat-grid-tile>
             <small>Added:<br> <b>{{ item.created | date:'d. MMM' }}</b> </small>
@@ -29,13 +44,13 @@
                 <mat-datepicker touchUi #picker></mat-datepicker>
             </small>
         </mat-grid-tile>
-        <mat-grid-tile>
+        <mat-grid-tile *ngIf="item.product">
             <small style="text-align: center;">
                 <b style="display: block;" >{{ (item.qty * item.product.qty) | number:'1.0-0' }} {{ item.product.qty_type }}</b>
                 ({{ (item.qty * 100) | number:'1.0-1' }}%)
             </small>
         </mat-grid-tile>
-        <mat-grid-tile>
+        <mat-grid-tile *ngIf="item.product">
             <div class="mat-btn-box">
                 <button 
                 mat-flat-button
@@ -58,7 +73,7 @@
     </mat-grid-list>
 
     <div
-        *ngIf="item.product.qty_type != 'pieces'"
+        *ngIf="item.product?.qty_type != 'pieces'"
         class="row">
         <mat-slider min="0" max="1" step="0.01" [(ngModel)]="item.qty" (change)="sliderChange()"></mat-slider>
     </div>

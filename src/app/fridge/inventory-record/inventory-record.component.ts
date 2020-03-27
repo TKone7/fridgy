@@ -43,6 +43,8 @@ export const MY_FORMATS = {
 })
 export class InventoryRecordComponent implements OnInit, OnChanges {
   @Input('item') item: Item;
+  @Input('show-product') showProduct: boolean;
+  
   @Output('remove') removeEmitter: EventEmitter<Item> = new EventEmitter();
   @Output('update') updateEmitter: EventEmitter<Item> = new EventEmitter();
 
