@@ -19,7 +19,7 @@ import { Fridge } from 'src/app/models/fridge';
   styleUrls: ['./fridge-content.component.css']
 })
 export class FridgeContentComponent {
-
+  inProgress = false;
   currentFridge: Fridge;
   items: Item[];
   categories: Category[];
@@ -68,12 +68,15 @@ export class FridgeContentComponent {
   async getProduct(item: Item) {
     return this.productService.get(item.barcode).toPromise();
   }
- 
+
   async fetchData() {
     console.log('fetchData started');
     this.fridgeService.currentFridge.subscribe(async fridge => {
       this.currentFridge = fridge;
       this.itemService.initFridge(fridge.id);
+      this.items = [];
+      this.inProgress = true;
+
       let items = await this.itemService.getAll().toPromise();
       console.log('items', items);
 
@@ -84,6 +87,8 @@ export class FridgeContentComponent {
         console.log(item);
         return item;
       }));
+      this.inProgress = false;
+
     });
   }
   async fetchCategories() {

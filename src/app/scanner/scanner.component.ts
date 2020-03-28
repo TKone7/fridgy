@@ -112,6 +112,7 @@ export class ScannerComponent {
   }
 
   camerasFoundHandler(cameras){
+    console.log(cameras);
     this.availableCameras = (cameras as MediaDeviceInfo[]);
   }
   switchCamera(){

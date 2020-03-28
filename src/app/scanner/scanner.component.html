@@ -37,6 +37,10 @@
 <button mat-raised-button (click)="scanSuccessHandler('7613404113745')" >Scan Eggs</button>
 <button mat-raised-button (click)="scanSuccessHandler('2104816004455')" >fake scan unknown</button>
 <button mat-raised-button (click)="switchCamera()" [disabled]="!(availableCameras?.length > 1)">Switch Camera</button>
+<select [(ngModel)]="currentCamera">
+    <option *ngFor="let cam of availableCameras" [ngValue]="cam">{{cam.label}}</option>
+    <option *ngFor="let cam of availableCameras" [ngValue]="cam">{{cam.label}}</option>
+</select>
 
 
 <zxing-scanner
