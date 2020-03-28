@@ -30,6 +30,8 @@ export class ScannerComponent {
   currentFridge: Fridge;
   fridgeEntries: Item[] = [];
   showAddProduct = false;
+  availableCameras: MediaDeviceInfo[] = [];
+  currentCamera: MediaDeviceInfo = null;
 
   scanSuccessHandler(event){
     this.showAddProduct = false;
@@ -107,6 +109,16 @@ export class ScannerComponent {
     this.barcodeValidator.validChecksum = BarcodeValidators.validChecksum(barcode);
 
     this.validBarcode = (this.barcodeValidator.correctLength && this.barcodeValidator.validChecksum);
+  }
+
+  camerasFoundHandler(cameras){
+    this.availableCameras = (cameras as MediaDeviceInfo[]);
+  }
+  switchCamera(){
+    let current = this.availableCameras.indexOf(this.currentCamera);
+    console.log('currenct cam is at index: ', current);
+    let next = (current + 1 ) % this.availableCameras.length;
+    console.log('next camera is', next);
   }
 
   constructor(

@@ -36,6 +36,7 @@
 
 <button mat-raised-button (click)="scanSuccessHandler('7613404113745')" >Scan Eggs</button>
 <button mat-raised-button (click)="scanSuccessHandler('2104816004455')" >fake scan unknown</button>
+<button mat-raised-button (click)="switchCamera()" [disabled]="!(availableCameras?.length > 1)">Switch Camera</button>
 
 
 <zxing-scanner
@@ -44,6 +45,8 @@
     }"
     [formats]="['EAN_13']"
     (scanSuccess)="scanSuccessHandler($event)"
+    (camerasFound)="camerasFoundHandler($event)"
+    [(device)]="currentCamera"
     >
 </zxing-scanner>
 <scan-action *ngIf="!scanningInProgress && currentFridge" (click)="contScanning()"></scan-action>
