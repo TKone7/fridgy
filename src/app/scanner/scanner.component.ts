@@ -10,7 +10,7 @@ import { AuthService, tokenUrl } from './../services/auth.service';
 import { User } from './../models/user';
 import { NotFoundError } from './../common/not-found-error';
 import { AppError } from './../common/app-error';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { take, switchMap } from 'rxjs/operators';
 import { ProductService } from './../services/product.service';
 import { Component} from '@angular/core';
@@ -119,12 +119,14 @@ export class ScannerComponent {
     let current = this.availableCameras.indexOf(this.currentCamera);
     console.log('currenct cam is at index: ', current);
     let next = (current + 1 ) % this.availableCameras.length;
+    this.currentCamera = this.availableCameras[next];
     console.log('next camera is', next);
   }
 
   constructor(
     private productService: ProductService,
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService,
     private fridgeService: FridgeService,
     private itemService: ItemService,
@@ -138,6 +140,11 @@ export class ScannerComponent {
         this.itemService.initFridge(fridge.id);
         if (this.product) this.loadItems(this.product);
       }
+    });
+
+    this.route.paramMap.subscribe(param => {
+      const barcode = param.get('barcode');
+      if (barcode) this.scanSuccessHandler(barcode);
     });
   }
 }

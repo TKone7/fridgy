@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component:  LoginComponent},
   { path: 'register', component:  RegisterComponent},
+  { path: 'scanner/:barcode', component: ScannerComponent},
   { path: 'scanner', component: ScannerComponent},
   {
     path: 'fridge/:fridgeId',
