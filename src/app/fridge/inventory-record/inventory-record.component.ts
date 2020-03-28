@@ -95,12 +95,16 @@ export class InventoryRecordComponent implements OnInit, OnChanges {
   updateDate(event) {
     const momentDate = new Date(this.item.expiry);
     this.item.expiry = _moment(momentDate).format('YYYY-MM-DD');
-    let product = this.item.product;
-    this.itemService.update(this.item.id, this.item).subscribe(item => {
-      this.item = item;
-      this.item.product = product;
-      this.calcDaysUntilExpiry();
-    });
+    // let product = this.item.product;
+
+    this.calcDaysUntilExpiry();
+    this.updateEmitter.emit(this.item);
+
+    // this.itemService.update(this.item.id, this.item).subscribe(item => {
+    //   this.item = item;
+    //   // this.item.product = product;
+    //   this.calcDaysUntilExpiry();
+    // });
   }
 
   ngOnInit() {

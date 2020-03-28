@@ -30,6 +30,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 // import { CustomFormsModule } from 'ng2-validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProductMainComponent } from './admin/product-main/product-main.component';
 import { ProductNutrientComponent } from './admin/product-nutrient/product-nutrient.component';
@@ -52,9 +53,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.component';
 import { ScanActionComponent } from './scan-action/scan-action.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -81,6 +84,7 @@ import { ScanActionComponent } from './scan-action/scan-action.component';
     FridgeContentComponent,
     FridgeSettingsComponent,
     ScanActionComponent,
+    FilterPipe,
   ],
   imports: [
     NgbModule,
@@ -97,7 +101,9 @@ import { ScanActionComponent } from './scan-action/scan-action.component';
     MatBadgeModule,
     MatIconModule,
     MatProgressBarModule,
+    MatChipsModule,
     MatDatepickerModule,
+    MatExpansionModule,
     MatGridListModule,
     MatSliderModule,
     MatCardModule,

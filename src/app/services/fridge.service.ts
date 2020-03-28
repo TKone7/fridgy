@@ -17,7 +17,7 @@ export class FridgeService extends DataService<Fridge> {
 
   private currentFridgeSubject: BehaviorSubject<Fridge>;
   public currentFridge: Observable<Fridge>;
-
+  public currentFridgeP: Promise<Fridge>;
   constructor(
     http: HttpClient
   ) {
@@ -25,6 +25,8 @@ export class FridgeService extends DataService<Fridge> {
 
     this.currentFridgeSubject = new BehaviorSubject<Fridge>(this.getFridgeFromLocal());
     this.currentFridge = this.currentFridgeSubject.asObservable();
+    this.currentFridgeP = this.currentFridgeSubject.toPromise();
+
   }
 
   public get currentFridgeValue(): Fridge {

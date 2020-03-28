@@ -1,21 +1,53 @@
-
 <div *ngIf="currentFridge; else noFridge">
-    <h5>
-    {{ currentFridge.name }}
-    </h5>
     
-    <inventory-record
-    *ngFor="let item of items"
-    (remove)="remove($event)"
-    (update)="update($event)"
-    [item]="item" [show-product]="true"></inventory-record>
+    <h5>
+        {{ currentFridge.name }}
+    </h5>
 
+    <mat-accordion *ngIf="items">
+
+        <mat-expansion-panel *ngIf="(items | filter: filterProductExpire).length != 0">
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                Expiring soon
+               
+            </mat-panel-title>
+            <mat-panel-description>
+                {{(items | filter: filterProductExpire).length}}
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div style="margin-left: -18px; margin-right: -18px;">
+                <inventory-record
+                    *ngFor="let item of items | filter: filterProductExpire"
+                    (remove)="remove($event)"
+                    (update)="update($event)"
+                    [item]="item" [show-product]="true">
+                </inventory-record>
+            </div>
+        </mat-expansion-panel>
         
-    <!-- <ul>
-        <li *ngFor="let item of items"> {{ item.barcode }}: {{ item.qty }}: {{ item.product?.name }} </li>
-    </ul> -->
+        <mat-expansion-panel *ngFor="let category of categories">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{category.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ (items | filter: filterProductCategory:category.slug)?.length || 0  }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div style="margin-left: -18px; margin-right: -18px;">
+                <inventory-record
+                    *ngFor="let item of items | filter: filterProductCategory:category.slug"
+                    (remove)="remove($event)"
+                    (update)="update($event)"
+                    [item]="item" [show-product]="true">
+                </inventory-record>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 
 </div>
+
 
 <ng-template #noFridge>
     <div>

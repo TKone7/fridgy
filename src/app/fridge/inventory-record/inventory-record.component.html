@@ -1,4 +1,5 @@
 <mat-card
+    *ngIf="item && item.product"
     class="item-card"
     >
     <mat-card-header *ngIf="showProduct">
@@ -12,7 +13,7 @@
             {{ item.product?.name }}
         </mat-card-title>
         <mat-card-subtitle>
-            {{ item.product?.description }}
+            {{ item.product?.description }} | {{ item.product?.qty }} {{ item.product?.qty_type }}
         </mat-card-subtitle>
       </mat-card-header>
     <mat-card-content>
