@@ -41,3 +41,13 @@ div.col {
 .product-header-image {
     background-size: cover;
 }
+.mat-card-header{
+    margin-bottom: -36px;
+}
+.mat-card-content{
+    margin-bottom: 0;
+}
+.mat-card>.mat-card-actions:last-child {
+    margin-bottom: -8px;
+    padding-bottom: 0;
+}

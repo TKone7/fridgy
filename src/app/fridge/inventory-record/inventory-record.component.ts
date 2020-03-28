@@ -49,6 +49,7 @@ export class InventoryRecordComponent implements OnInit, OnChanges {
   @Output('update') updateEmitter: EventEmitter<Item> = new EventEmitter();
 
   daysUntilExpiry: number;
+  showSlider = false;
 
   constructor(
     private itemService: ItemService
@@ -67,11 +68,16 @@ export class InventoryRecordComponent implements OnInit, OnChanges {
   }
 
   reduce(){
-    this.item.qty -= 1 / this.item.product.qty;
-    if (Math.round(this.item.qty * 100) / 100 === 0.0)
-      this.remove();
-    else
-      this.update();
+    if (this.item.product.qty_type === 'pieces'){
+      this.item.qty -= 1 / this.item.product.qty;
+      if (Math.round(this.item.qty * 100) / 100 === 0.0)
+        this.remove();
+      else
+        this.update();
+    }
+    else {
+      this.showSlider = !this.showSlider;
+    }
   }
 
   ngOnChanges() {

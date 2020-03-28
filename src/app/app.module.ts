@@ -29,14 +29,10 @@ import { RefreshTokenInterceptor } from './refresh-token-interceptor';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 // import { CustomFormsModule } from 'ng2-validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProductMainComponent } from './admin/product-main/product-main.component';
 import { ProductNutrientComponent } from './admin/product-nutrient/product-nutrient.component';
-import {MatButtonModule} from '@angular/material/button';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
@@ -48,8 +44,15 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatGridListModule} from '@angular/material/grid-list'; 
-import {MatCardModule} from '@angular/material/card'; 
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTableModule } from '@angular/material/table';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.component';
 import { ScanActionComponent } from './scan-action/scan-action.component';
 
@@ -91,7 +94,9 @@ import { ScanActionComponent } from './scan-action/scan-action.component';
     MatPaginatorModule,
     MatSortModule,
     MatButtonModule,
+    MatBadgeModule,
     MatIconModule,
+    MatProgressBarModule,
     MatDatepickerModule,
     MatGridListModule,
     MatSliderModule,

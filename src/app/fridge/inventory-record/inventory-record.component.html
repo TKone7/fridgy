@@ -1,4 +1,6 @@
-<mat-card class="item-card">
+<mat-card
+    class="item-card"
+    >
     <mat-card-header *ngIf="showProduct">
         <div 
             *ngIf="item.product?.imgurl"
@@ -13,8 +15,9 @@
             {{ item.product?.description }}
         </mat-card-subtitle>
       </mat-card-header>
-    
-    <mat-grid-list cols="4" colHeight="80px">
+    <mat-card-content>
+
+    <mat-grid-list cols="3" colHeight="60px" >
         <mat-grid-tile>
             <small>Added:<br> <b>{{ item.created | date:'d. MMM' }}</b> </small>
         </mat-grid-tile>
@@ -45,38 +48,35 @@
             </small>
         </mat-grid-tile>
         <mat-grid-tile *ngIf="item.product">
+
             <small style="text-align: center;">
                 <b style="display: block;" >{{ (item.qty * item.product.qty) | number:'1.0-0' }} {{ item.product.qty_type }}</b>
                 ({{ (item.qty * 100) | number:'1.0-1' }}%)
             </small>
-        </mat-grid-tile>
-        <mat-grid-tile *ngIf="item.product">
-            <div class="mat-btn-box">
-                <button 
-                mat-flat-button
-                color="warn"
-                (click)="remove()"
-                class="btn-block">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <button 
-                *ngIf="item.product.qty_type === 'pieces'"
-                mat-flat-button
-                color="accent"
-                (click)="reduce()"
-                class="btn-block">
-                <span aria-hidden="true">-1</span>
-            </button>
-            </div>
-            
+                
         </mat-grid-tile>
     </mat-grid-list>
 
-    <div
-        *ngIf="item.product?.qty_type != 'pieces'"
-        class="row">
-        <mat-slider min="0" max="1" step="0.01" [(ngModel)]="item.qty" (change)="sliderChange()"></mat-slider>
-    </div>
+    <mat-slider *ngIf="showSlider" min="0" max="1" step="0.01" [(ngModel)]="item.qty" (change)="sliderChange()"></mat-slider>
+    <mat-progress-bar *ngIf="!showSlider" mode="determinate" [value]="item.qty*100"></mat-progress-bar>
+
+  
+    </mat-card-content>
+    <mat-card-actions>
+        <button                 
+            mat-button
+            (click)="reduce()"
+            >
+                {{ (item.product.qty_type != 'pieces' && showSlider) ? 'DONE' : 'REDUCE' }}
+        </button>
+        <button 
+                mat-stroked-button
+                color="warn"
+                (click)="remove()"
+                >
+                <mat-icon class="icon">delete_outline</mat-icon>
+        </button>
+    </mat-card-actions>
 </mat-card>
 
 
