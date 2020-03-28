@@ -34,26 +34,30 @@ export class ScannerComponent {
   currentCamera: MediaDeviceInfo = null;
 
   scanSuccessHandler(event){
+    this.router.navigate(['scanner', event]);
+    this.loadProduct(event);
+  }
+
+  private loadProduct(barcode){
     this.showAddProduct = false;
-    this.event = event;
-    this.validateBarcode(event);
+    this.event = barcode;
+    this.validateBarcode(barcode);
     if (!this.validBarcode) return;
 
-    this.productService.get(event)
-        .pipe(
-          take(1),
-        )
-        .subscribe(product => {
-          this.product = product;
-          this.loadItems(product);
+    this.productService.get(barcode)
+      .pipe(
+        take(1)
+      )
+      .subscribe(product => {
+        this.product = product;
+        this.loadItems(product);
+      }, (error: AppError) => {
+        if (error instanceof NotFoundError) {
+          this.showAddProduct = true;
+        } else {
+          throw error;
         }
-          , (error: AppError) => {
-            if (error instanceof NotFoundError) {
-              this.showAddProduct = true;
-            } else {
-              throw error;
-            }
-          });
+    });
   }
 
   private loadItems(product: Product) {
@@ -81,6 +85,7 @@ export class ScannerComponent {
   }
 
   contScanning() {
+    this.router.navigate(['scanner']);
     this.showAddProduct = false;
     this.product = null;
     this.fridgeEntries = null;
