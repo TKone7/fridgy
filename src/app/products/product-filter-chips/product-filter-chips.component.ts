@@ -19,7 +19,7 @@ export class ProductFilterChipsComponent implements OnInit {
     this.categories$ = categoryService.getAll({ order: { column: 'slug', dir: 'desc' } });
   }
 
-  change(categorySlug) {
+  change(categorySlug?: string) {
     console.log('log ', categorySlug);
     if (categorySlug)
       this.router.navigate(['products'], {queryParams: {category: categorySlug}});
