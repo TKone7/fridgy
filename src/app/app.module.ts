@@ -35,6 +35,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProductMainComponent } from './admin/product-main/product-main.component';
 import { ProductNutrientComponent } from './admin/product-nutrient/product-nutrient.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductFilterChipsComponent } from './products/product-filter-chips/product-filter-chips.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { InventoryRecordComponent } from './fridge/inventory-record/inventory-record.component';
@@ -78,6 +79,7 @@ import { FilterPipe } from './filter.pipe';
     ProductMainComponent,
     ProductNutrientComponent,
     ProductFilterComponent,
+    ProductFilterChipsComponent,
     ProductCardComponent,
     InventoryRecordComponent,
     RegisterComponent,

@@ -1,0 +1,32 @@
+<div class="sticky-top">
+    <mat-chip-list>
+        <mat-chip
+            [selected]="!category"
+            (click)="change()">
+            All
+        </mat-chip>
+        <mat-chip
+            *ngFor="let c of categories$ | async"
+            [selected]="c.slug === category"
+            (click)="change(c.slug)">
+            {{c.name}}
+        </mat-chip>
+      </mat-chip-list>
+
+    <!-- <div class="list-group">
+        <a
+            class="list-group-item list-group-item-action"
+            routerLink="/products"
+            [class.active]="!category">
+            All Categories
+        </a>
+        <a
+            *ngFor="let c of categories$ | async"
+            class="list-group-item list-group-item-action"
+            routerLink="/products"
+            [queryParams]="{ category: c.slug}"
+            [class.active]="c.slug === category">
+            {{c.name}}
+        </a>
+    </div> -->
+</div>
