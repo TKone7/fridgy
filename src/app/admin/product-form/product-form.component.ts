@@ -91,7 +91,7 @@ export class ProductFormComponent implements OnInit {
 
     saveObservable.subscribe(r => {
       let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-      this.router.navigate([returnUrl || '/admin/products']);
+      this.router.navigateByUrl(returnUrl || '/admin/products');
     });
   }
 

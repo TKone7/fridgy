@@ -3,10 +3,18 @@
 
   }
 
-  .mat-mini-fab.mat-fab-bottom-right {
+.mat-mini-fab.mat-fab-bottom-right {
     top: auto;
     right: 28px;
     left: auto;
     bottom: 100px;
     position: fixed;
+}
+
+.mat-fab.mat-fab-bottom-right {
+  top: auto;
+  right: 20px;
+  left: auto;
+  bottom: 20px;
+  position: fixed;
 }

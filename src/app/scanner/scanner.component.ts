@@ -38,7 +38,7 @@ export class ScannerComponent {
   log = '';
 
   scanSuccessHandler(event){
-    this.router.navigate(['scanner', event]);
+    this.router.navigate([], { queryParams: { q: event } });
     this.loadProduct(event);
   }
 
@@ -89,9 +89,9 @@ export class ScannerComponent {
   }
 
   contScanning() {
-    this.router.navigate(['scanner']);
+    this.router.navigate([], { queryParams: null });
     this.showAddProduct = false;
-    this.product = null;
+    this.product = null; 
     this.fridgeEntries = null;
   }
 
@@ -155,8 +155,8 @@ export class ScannerComponent {
       }
     });
 
-    this.route.paramMap.subscribe(param => {
-      const barcode = param.get('barcode');
+    this.route.queryParamMap.subscribe(qParam => {
+      const barcode = qParam.get('q');
       if (barcode) this.loadProduct(barcode);
     });
   }
