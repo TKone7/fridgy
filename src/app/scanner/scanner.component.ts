@@ -132,6 +132,7 @@ export class ScannerComponent {
   switchCamera(){
     this.currentCameraIndex = (this.currentCameraIndex + 1 ) % this.availableCameras.length;
     this.currentCamera = this.availableCameras[this.currentCameraIndex];
+    localStorage.setItem('cameraPreference', this.currentCameraIndex.toString());
   }
 
 

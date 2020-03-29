@@ -1,11 +1,11 @@
-<div class="row">
-    <div class="col" style="display: block;">
+<div class="row" style="display: block;">
+    <div class="col">
         <!-- <product-filter [category]="category"></product-filter> -->
         <product-filter-chips [category]="category"></product-filter-chips>
 
     </div>
     <div class="col">
-        <div class="row">
+        <div class="row product-container" >
             <ng-container *ngFor="let p of filteredProducts; let i = index">
                 <div class="col">
                     <product-card (edit)="editProduct($event)" [product]="p" [show-actions]="false"></product-card>

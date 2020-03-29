@@ -39,7 +39,7 @@ export class BsNavbarComponent implements OnInit {
   activateFridge(fridge: Fridge){
     this.toggleBurger();
     this.fridgeService.setFridgeToLocal(fridge);
-    console.log('tolocal: ', fridge);
+    this.router.navigate(['/']);
   }
   editFridge(fridge: Fridge){
     this.toggleBurger();
