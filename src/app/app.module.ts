@@ -28,7 +28,7 @@ import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/fo
 import { RefreshTokenInterceptor } from './refresh-token-interceptor';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 // import { CustomFormsModule } from 'ng2-validation';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -120,7 +120,7 @@ import { FilterPipe } from './filter.pipe';
         blacklistedRoutes: []
       }
     }),
-    NoopAnimationsModule
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,

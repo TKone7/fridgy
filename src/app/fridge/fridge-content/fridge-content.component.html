@@ -4,7 +4,7 @@
         {{ currentFridge.name }}
     </h5>
     
-    <mat-progress-spinner *ngIf="inProgress || true" mode="indeterminate"></mat-progress-spinner>
+    <mat-progress-spinner *ngIf="inProgress" mode="indeterminate"></mat-progress-spinner>
 
     <mat-accordion *ngIf="items && !inProgress">
 
