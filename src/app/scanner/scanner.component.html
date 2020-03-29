@@ -39,9 +39,6 @@
 
 <button mat-raised-button (click)="scanSuccessHandler('7613404113745')" >Scan Eggs</button>
 <button mat-raised-button (click)="scanSuccessHandler('7610632994122')" >fake scan unknown</button>
-<button mat-raised-button (click)="switchCamera()" [disabled]="false && !(availableCameras?.length > 1)">
-    <mat-icon class="icon">flip_camera_ios</mat-icon>
-</button>
 
 <zxing-scanner
     [ngStyle]="{
@@ -56,13 +53,13 @@
 
 <button
     [disabled]="!(availableCameras?.length > 1)"
-    *ngIf="showOptions"
+    *ngIf="(!this.showAddProduct && !this.product)"
     [color]="(availableCameras?.length > 1) ? 'primary' : 'accent'"
     (click)="switchCamera()"
     class="mat-fab-bottom-right"
-    mat-mini-fab>
+    mat-fab>
     <mat-icon class="icon">flip_camera_ios</mat-icon>
 </button>
 
 
-<scan-action  (pressed)="cameraClick()"></scan-action>
+<scan-action *ngIf="(this.showAddProduct || this.product)" (pressed)="this.contScanning()"></scan-action>

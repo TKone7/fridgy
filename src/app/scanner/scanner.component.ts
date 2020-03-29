@@ -35,15 +35,14 @@ export class ScannerComponent {
   currentCameraIndex: number;
   showOptions = false;
 
-  log = '';
-
   scanSuccessHandler(event){
     this.router.navigate([], { queryParams: { q: event } });
     this.loadProduct(event);
   }
 
   private loadProduct(barcode){
-    this.showAddProduct = false;
+    this.clear();
+
     this.event = barcode;
     this.validateBarcode(barcode);
     if (!this.validBarcode) return;
@@ -62,6 +61,12 @@ export class ScannerComponent {
           throw error;
         }
     });
+  }
+
+  private clear(){
+    this.showAddProduct = false;
+    this.product = null;
+    this.fridgeEntries = null;
   }
 
   private loadItems(product: Product) {
@@ -90,9 +95,7 @@ export class ScannerComponent {
 
   contScanning() {
     this.router.navigate([], { queryParams: null });
-    this.showAddProduct = false;
-    this.product = null; 
-    this.fridgeEntries = null;
+    this.clear();
   }
 
   editProduct(product: Product) {
@@ -130,11 +133,7 @@ export class ScannerComponent {
     this.currentCameraIndex = (this.currentCameraIndex + 1 ) % this.availableCameras.length;
     this.currentCamera = this.availableCameras[this.currentCameraIndex];
   }
-  cameraClick(){
-    if (this.scanningInProgress) this.showOptions = !this.showOptions;
-    else
-      this.contScanning();
-  }
+
 
   constructor(
     private productService: ProductService,
