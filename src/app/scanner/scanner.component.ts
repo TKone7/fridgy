@@ -126,19 +126,14 @@ export class ScannerComponent {
     this.currentCameraIndex = 0;
   }
   switchCamera(){
-    this.log = '';
-    
-    console.log('currenct cam is at index: ', this.currentCameraIndex);
-    this.log += 'currenct cam is at index: ' + this.currentCameraIndex;
     this.currentCameraIndex = (this.currentCameraIndex + 1 ) % this.availableCameras.length;
     this.currentCamera = this.availableCameras[this.currentCameraIndex];
-    console.log('next camera is', this.currentCameraIndex);
-    this.log += 'next camera is ' + this.currentCameraIndex;
-
   }
   cameraClick(){
-    if (this.scanningInProgress) this.switchCamera();
-    else this.contScanning();
+    if (this.scanningInProgress)
+      this.switchCamera();
+    else
+      this.contScanning();
   }
 
   constructor(
