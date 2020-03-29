@@ -56,7 +56,7 @@
             </span>
             <span class="fridge addNew" *ngIf="!showAddFridgeName" (click)="$event.stopPropagation(); showAddFridgeName = !showAddFridgeName">add new...</span>
             <span class="fridge addNew" *ngIf="showAddFridgeName">
-              <input #fridgeName (keyup.enter)="addFridge(fridgeName)" type="text">
+              <input #fridgeName (keyup.enter)="addFridge(fridgeName)" type="text" required>
             </span>
           </div>
         </li>

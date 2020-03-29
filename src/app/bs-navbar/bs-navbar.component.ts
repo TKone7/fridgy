@@ -46,10 +46,12 @@ export class BsNavbarComponent implements OnInit {
     this.router.navigate(['/fridge', fridge.id]);
   }
   addFridge(fridgeName: HTMLInputElement){
+    if (fridgeName.value === '') return;
     let newFridge: Fridge = {name: fridgeName.value};
     this.fridgeService.create(newFridge).subscribe(fridge => {
       this.fridges.push(fridge);
       fridgeName.value = '';
+      this.showAddFridgeName = false;
     });
   }
   toggleBurger(){

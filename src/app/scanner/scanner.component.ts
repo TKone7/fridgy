@@ -129,8 +129,9 @@ export class ScannerComponent {
   camerasFoundHandler(cameras){
     console.log(cameras);
     this.availableCameras = (cameras as MediaDeviceInfo[]);
-    this.currentCamera = cameras[0];
-    this.currentCameraIndex = 0;
+    let cameraIndex = (parseInt(localStorage.getItem('cameraPreference'), 10) || 0);
+    this.currentCamera = cameras[cameraIndex];
+    this.currentCameraIndex = cameraIndex;
   }
   switchCamera(){
     this.currentCameraIndex = (this.currentCameraIndex + 1 ) % this.availableCameras.length;
@@ -164,8 +165,6 @@ export class ScannerComponent {
           this.deviceChange.emit(null);
       });
     };
-
-    this.activateCamera();
 
     this.currentUser = this.authService.currentUserValue;
 
