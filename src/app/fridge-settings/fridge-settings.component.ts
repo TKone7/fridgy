@@ -1,3 +1,5 @@
+import { NotFoundError } from './../common/not-found-error';
+import { AppError } from './../common/app-error';
 import { FridgeManagerService } from './../fridge-manager.service';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
@@ -14,8 +16,10 @@ import { Fridge } from '../models/fridge';
 export class FridgeSettingsComponent implements OnInit {
 
   fridge: Fridge;
+  notFound = false;
+
   form = new FormGroup({
-    input: new FormControl('', Validators.email),
+    input: new FormControl('', [Validators.email, Validators.required]),
     creator: new FormControl(''),
     members: new FormArray([])
   });
@@ -57,13 +61,22 @@ export class FridgeSettingsComponent implements OnInit {
     return this.form.get('input') as FormControl;
   }
   addUser(email: HTMLInputElement) {
+    email.blur(); // to trigger potential error messages
+
     if (this.input.invalid) return;
 
     this.fridgeManager.addOwner(this.fridge.id, email.value)
       .subscribe(fridge => {
         this.updateFridge(fridge);
+        email.value = '';
+        this.notFound = false;
+      }, (error: AppError) => {
+        if (error instanceof NotFoundError) {
+          this.notFound = true;
+        } else {
+          throw error;
+        }
       });
-    email.value = '';
   }
   removeUser(member: FormControl) {
     if (!confirm('Are you sure you want to delete the user ' + member.value + ' from the fridge?')) return;

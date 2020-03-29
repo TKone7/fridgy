@@ -1,7 +1,22 @@
 <h3>{{ fridge?.name }}</h3>
 <form [formGroup]="form" >
-    <input formControlName="input" type="text" class="form-control"
-    (keyup.enter)="addUser(email)" #email placeholder="example@email.com">
+    <input
+        formControlName="input"
+        type="text"
+        class="form-control"
+        (keyup.enter)="addUser(email)"
+        (keyup)="notFound = false"
+        #email
+        placeholder="example@email.com">
+    <div *ngIf="(input.touched && input.invalid) || notFound" class="alert alert-danger">
+        <div *ngIf="input.invalid">
+            Please enter a valid email address.
+        </div>
+        <div *ngIf="notFound">
+            This email address is not registered.
+        </div>
+    </div>
+    
     <ul class="list-group">
         <li class="list-group-item" >
             {{ creator.value }}
