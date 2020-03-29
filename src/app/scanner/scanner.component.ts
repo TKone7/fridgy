@@ -133,6 +133,10 @@ export class ScannerComponent {
     this.log += 'next camera is ' + next;
 
   }
+  cameraClick(){
+    if (this.scanningInProgress) this.switchCamera();
+    else this.contScanning();
+  }
 
   constructor(
     private productService: ProductService,

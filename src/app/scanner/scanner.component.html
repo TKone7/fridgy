@@ -47,6 +47,7 @@
 <ul>
     <li *ngFor="let cam of availableCameras">index: {{ availableCameras.indexOf(cam) }}; {{ cam.label }}; active: {{ cam === currentCamera  }}</li>
 </ul>
+<span>currentCamera: {{ currentCamera?.label }}: index {{ availableCameras.indexOf(currentCamera) }}  </span><br>
 <span>Log: {{ log }}</span>
 <zxing-scanner
     [ngStyle]="{
@@ -59,4 +60,4 @@
     >
 </zxing-scanner>
 
-<scan-action *ngIf="!scanningInProgress && currentFridge" (click)="contScanning()"></scan-action>
+<scan-action *ngIf="currentFridge" (click)="cameraClick()"></scan-action>
