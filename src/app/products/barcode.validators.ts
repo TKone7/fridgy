@@ -23,4 +23,10 @@ export class BarcodeValidators {
         let checksum = 10 - (sum % 10);
         return (Number.parseInt(barcode.charAt(12), 10) === checksum);
     }
+    static checksumMustValidate(control: AbstractControl): ValidationErrors | null{
+        if (!BarcodeValidators.validChecksum(control.value as string))
+            return { checksumMustValidate: true};
+
+        return null;
+    }
 }

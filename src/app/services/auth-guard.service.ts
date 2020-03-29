@@ -8,13 +8,10 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentUserValue;
-    if (currentUser) {
-      return true;
-    }
-    if (state.url === '/')
-      this.router.navigate(['/home']);
-    else
-      this.router.navigate(['/login'], {queryParams: { returnUrl: state.url}});
+    if (currentUser) return true;
+
+    if (state.url === '/') this.router.navigate(['/home']);
+    else this.router.navigate(['/login'], {queryParams: { returnUrl: state.url}});
     return false;
   }
 

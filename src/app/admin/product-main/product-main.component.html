@@ -23,6 +23,7 @@
         <div *ngIf="barcode.touched && barcode.invalid" class="alert alert-danger">
             <div *ngIf="barcode.errors?.required">Barcode is required</div>
             <div *ngIf="barcode.errors?.number">Barcode must be a number</div>
+            <div *ngIf="barcode.errors?.checksumMustValidate">The checksum is invalid.</div>
         </div>
     </div>
     <div class="form-group">

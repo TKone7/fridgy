@@ -1,3 +1,4 @@
+import { BarcodeValidators } from './../../products/barcode.validators';
 import { Product } from './../../models/product';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
 // import { CustomValidators } from 'ng2-validation';
 
 
@@ -17,7 +19,7 @@ export class ProductFormComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', Validators.required),
     description: new FormControl(),
-    barcode: new FormControl('', [Validators.required]),
+    barcode: new FormControl('', [Validators.required, BarcodeValidators.checksumMustValidate]),
     'qty_type': new FormControl(),
     qty: new FormControl('', [Validators.required, Validators.min(0)]),
     category: new FormControl('', Validators.required),
@@ -55,9 +57,10 @@ export class ProductFormComponent implements OnInit {
           this.form.patchValue(p);
           this.form.get('barcode').disable();
         });
-
-      let newBarcode = this.route.snapshot.queryParamMap.get('barcode');
-      this.form.get('barcode').setValue(newBarcode);
+      else {
+        let newBarcode = this.route.snapshot.queryParamMap.get('barcode');
+        this.form.get('barcode').setValue(newBarcode);
+      }
   }
 
   activate(tab) {
@@ -79,14 +82,17 @@ export class ProductFormComponent implements OnInit {
 
   save(){
     let product = this.form.getRawValue();
+    let saveObservable: Observable<Product>;
 
-    if (this.existingBarcode) this.productService.update(this.existingBarcode, product).subscribe(r => {
-      this.router.navigate(['/admin/products']);
-    });
-    else this.productService.create(product).subscribe(r => {
-      this.router.navigate(['/admin/products']);
-    });
+    if (this.existingBarcode)
+      saveObservable = this.productService.update(this.existingBarcode, product);
+    else
+      saveObservable = this.productService.create(product);
 
+    saveObservable.subscribe(r => {
+      let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+      this.router.navigate([returnUrl || '/admin/products']);
+    });
   }
 
   delete(){

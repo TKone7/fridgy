@@ -33,6 +33,8 @@ export class ScannerComponent {
   availableCameras: MediaDeviceInfo[] = [];
   currentCamera: MediaDeviceInfo = null;
 
+  log = '';
+
   scanSuccessHandler(event){
     this.router.navigate(['scanner', event]);
     this.loadProduct(event);
@@ -44,7 +46,7 @@ export class ScannerComponent {
     this.validateBarcode(barcode);
     if (!this.validBarcode) return;
 
-    this.productService.get(barcode)
+    this.productService.get(barcode, true)
       .pipe(
         take(1)
       )
@@ -92,11 +94,11 @@ export class ScannerComponent {
   }
 
   editProduct(product: Product) {
-    this.router.navigate(['/admin/products', product.barcode]);
+    this.router.navigate(['/admin/products', product.barcode], { queryParams: { returnUrl: this.router.url } });
   }
 
   createProduct() {
-    this.router.navigate(['/admin/products/new'], { queryParams: { barcode: this.event }});
+    this.router.navigate(['/admin/products/new'], { queryParams: { barcode: this.event, returnUrl: this.router.url }});
   }
 
   addToFridge() {
@@ -121,11 +123,15 @@ export class ScannerComponent {
     this.availableCameras = (cameras as MediaDeviceInfo[]);
   }
   switchCamera(){
+    this.log = '';
     let current = this.availableCameras.indexOf(this.currentCamera);
     console.log('currenct cam is at index: ', current);
+    this.log += 'currenct cam is at index: ' + current;
     let next = (current + 1 ) % this.availableCameras.length;
     this.currentCamera = this.availableCameras[next];
     console.log('next camera is', next);
+    this.log += 'next camera is ' + next;
+
   }
 
   constructor(
@@ -149,7 +155,7 @@ export class ScannerComponent {
 
     this.route.paramMap.subscribe(param => {
       const barcode = param.get('barcode');
-      if (barcode) this.scanSuccessHandler(barcode);
+      if (barcode) this.loadProduct(barcode);
     });
   }
 }
