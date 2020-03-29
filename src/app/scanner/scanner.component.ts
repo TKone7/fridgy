@@ -32,6 +32,7 @@ export class ScannerComponent {
   showAddProduct = false;
   availableCameras: MediaDeviceInfo[] = [];
   currentCamera: MediaDeviceInfo = null;
+  currentCameraIndex: number;
 
   log = '';
 
@@ -122,16 +123,17 @@ export class ScannerComponent {
     console.log(cameras);
     this.availableCameras = (cameras as MediaDeviceInfo[]);
     this.currentCamera = cameras[0];
+    this.currentCameraIndex = 0;
   }
   switchCamera(){
     this.log = '';
-    let current = this.availableCameras.indexOf(this.currentCamera);
-    console.log('currenct cam is at index: ', current);
-    this.log += 'currenct cam is at index: ' + current;
-    let next = (current + 1 ) % this.availableCameras.length;
-    this.currentCamera = this.availableCameras[next];
-    console.log('next camera is', next);
-    this.log += 'next camera is ' + next;
+    
+    console.log('currenct cam is at index: ', this.currentCameraIndex);
+    this.log += 'currenct cam is at index: ' + this.currentCameraIndex;
+    this.currentCameraIndex = (this.currentCameraIndex + 1 ) % this.availableCameras.length;
+    this.currentCamera = this.availableCameras[this.currentCameraIndex];
+    console.log('next camera is', this.currentCameraIndex);
+    this.log += 'next camera is ' + this.currentCameraIndex;
 
   }
   cameraClick(){
