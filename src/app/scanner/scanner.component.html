@@ -36,14 +36,14 @@
 </inventory-record>
 
 
-
+<!-- [ngStyle]="{
+        'visibility': (scanningInProgress && currentFridge) ? 'inherit' : 'hidden'
+    }" -->
 <button mat-raised-button (click)="scanSuccessHandler('7613404113745')" >Scan Eggs</button>
 <button mat-raised-button (click)="scanSuccessHandler('7610632994122')" >fake scan unknown</button>
 
 <zxing-scanner
-    [ngStyle]="{
-        'visibility': (scanningInProgress && currentFridge) ? 'inherit' : 'hidden'
-    }"
+    [enable]="scannerEnabled"
     [formats]="['EAN_13']"
     (scanSuccess)="scanSuccessHandler($event)"
     (camerasFound)="camerasFoundHandler($event)"

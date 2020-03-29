@@ -15,6 +15,7 @@ import { take, switchMap } from 'rxjs/operators';
 import { ProductService } from './../services/product.service';
 import { Component} from '@angular/core';
 import { BarcodeValidators } from '../products/barcode.validators';
+import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 
 @Component({
   selector: 'scanner',
@@ -33,7 +34,7 @@ export class ScannerComponent {
   availableCameras: MediaDeviceInfo[] = [];
   currentCamera: MediaDeviceInfo = null;
   currentCameraIndex: number;
-  showOptions = false;
+  scannerEnabled = true;
 
   scanSuccessHandler(event){
     this.router.navigate([], { queryParams: { q: event } });
@@ -43,6 +44,7 @@ export class ScannerComponent {
   private loadProduct(barcode){
     this.clear();
 
+    this.disableCamera();
     this.event = barcode;
     this.validateBarcode(barcode);
     if (!this.validBarcode) return;
@@ -95,6 +97,7 @@ export class ScannerComponent {
 
   contScanning() {
     this.router.navigate([], { queryParams: null });
+    this.activateCamera();
     this.clear();
   }
 
@@ -112,9 +115,9 @@ export class ScannerComponent {
     });
   }
 
-  get scanningInProgress(): boolean {
-    return (!this.showAddProduct && !this.product);
-  }
+  // get scanningInProgress(): boolean {
+  //   return (!this.showAddProduct && !this.product);
+  // }
 
   private validateBarcode(barcode: string){
     this.barcodeValidator.correctLength = BarcodeValidators.correctLength(barcode);
@@ -135,6 +138,16 @@ export class ScannerComponent {
     localStorage.setItem('cameraPreference', this.currentCameraIndex.toString());
   }
 
+  private activateCamera() {
+    this.scannerEnabled = true;
+    let cameraIndex = (parseInt(localStorage.getItem('cameraPreference'), 10) || 0);
+    this.currentCamera = this.availableCameras[cameraIndex];
+  }
+  private disableCamera() {
+    localStorage.setItem('cameraPreference', this.currentCameraIndex.toString());
+    this.scannerEnabled = false;
+  }
+
 
   constructor(
     private productService: ProductService,
@@ -145,6 +158,15 @@ export class ScannerComponent {
     private itemService: ItemService,
     private fridgeManager: FridgeManagerService,
   ) {
+    ZXingScannerComponent.prototype.reset = function() {
+      this._reset();
+      setTimeout(() => {
+          this.deviceChange.emit(null);
+      });
+    };
+
+    this.activateCamera();
+
     this.currentUser = this.authService.currentUserValue;
 
     this.fridgeService.currentFridge.subscribe(fridge => {
