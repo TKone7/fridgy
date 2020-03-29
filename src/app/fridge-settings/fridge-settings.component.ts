@@ -4,7 +4,7 @@ import { FridgeManagerService } from './../fridge-manager.service';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { FridgeService } from './../services/fridge.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Fridge } from '../models/fridge';
 
@@ -24,11 +24,12 @@ export class FridgeSettingsComponent implements OnInit {
     members: new FormArray([])
   });
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private fridgeService: FridgeService,
     private fridgeManager: FridgeManagerService
   ) {
-    this.router.paramMap
+    this.route.paramMap
       .pipe(
         switchMap(params => {
           let fridgeId = params.get('fridgeId');
@@ -91,7 +92,9 @@ export class FridgeSettingsComponent implements OnInit {
   }
 
   removeFridge() {
-    this.fridgeService.delete(this.fridge.id).subscribe();
+    this.fridgeService.delete(this.fridge.id).subscribe(() => {
+      this.router.navigate(['/']);
+    });
   }
 
   ngOnInit() {

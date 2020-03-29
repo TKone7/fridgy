@@ -27,7 +27,8 @@ export class BsNavbarComponent implements OnInit {
         this.currentUser = user;
         this.currentFridge$ = fridgeService.currentFridge;
         if (this.currentUser)
-          this.fridgeService.getAll().subscribe(fridges => this.fridges = fridges);
+          this.fridgeService.fridges.subscribe(fridges => this.fridges = fridges);
+          // this.fridgeService.getAll().subscribe(fridges => this.fridges = fridges);
         else
           this.fridges = [];
       });
@@ -49,7 +50,7 @@ export class BsNavbarComponent implements OnInit {
     if (fridgeName.value === '') return;
     let newFridge: Fridge = {name: fridgeName.value};
     this.fridgeService.create(newFridge).subscribe(fridge => {
-      this.fridges.push(fridge);
+      // this.fridges.push(fridge);
       fridgeName.value = '';
       this.showAddFridgeName = false;
     });
