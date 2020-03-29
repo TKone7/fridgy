@@ -33,6 +33,7 @@ export class ScannerComponent {
   availableCameras: MediaDeviceInfo[] = [];
   currentCamera: MediaDeviceInfo = null;
   currentCameraIndex: number;
+  showOptions = false;
 
   log = '';
 
@@ -130,8 +131,7 @@ export class ScannerComponent {
     this.currentCamera = this.availableCameras[this.currentCameraIndex];
   }
   cameraClick(){
-    if (this.scanningInProgress)
-      this.switchCamera();
+    if (this.scanningInProgress) this.showOptions = !this.showOptions;
     else
       this.contScanning();
   }

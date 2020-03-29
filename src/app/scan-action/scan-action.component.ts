@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./scan-action.component.css']
 })
 export class ScanActionComponent  {
-  @Output('click') scanEmitter = new EventEmitter();
+  @Output('pressed') scanEmitter = new EventEmitter();
 
   constructor() { }
 

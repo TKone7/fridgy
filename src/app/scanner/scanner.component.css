@@ -2,3 +2,11 @@
     max-height: 10vh;
 
   }
+
+  .mat-mini-fab.mat-fab-bottom-right {
+    top: auto;
+    right: 28px;
+    left: auto;
+    bottom: 100px;
+    position: fixed;
+}
