@@ -130,8 +130,10 @@ export class ScannerComponent {
     console.log(cameras);
     this.availableCameras = (cameras as MediaDeviceInfo[]);
     let cameraIndex = (parseInt(localStorage.getItem('cameraPreference'), 10) || 0);
-    this.currentCamera = cameras[cameraIndex];
+    console.log('load camera from local storage', cameraIndex);
     this.currentCameraIndex = cameraIndex;
+
+    this.currentCamera = this.availableCameras[cameraIndex];
   }
   switchCamera(){
     this.currentCameraIndex = (this.currentCameraIndex + 1 ) % this.availableCameras.length;
@@ -140,9 +142,12 @@ export class ScannerComponent {
   }
 
   private activateCamera() {
-    this.scannerEnabled = true;
     let cameraIndex = (parseInt(localStorage.getItem('cameraPreference'), 10) || 0);
+    console.log('set camera to ', cameraIndex, this.availableCameras[cameraIndex]);
     this.currentCamera = this.availableCameras[cameraIndex];
+    this.scannerEnabled = true;
+    console.log('current cam', this.currentCamera);
+
   }
   private disableCamera() {
     localStorage.setItem('cameraPreference', this.currentCameraIndex.toString());

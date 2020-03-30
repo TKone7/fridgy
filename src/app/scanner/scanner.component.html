@@ -47,7 +47,7 @@
     [formats]="['EAN_13']"
     (scanSuccess)="scanSuccessHandler($event)"
     (camerasFound)="camerasFoundHandler($event)"
-    [(device)]="currentCamera"
+    [device]="currentCamera"
     >
 </zxing-scanner>
 
