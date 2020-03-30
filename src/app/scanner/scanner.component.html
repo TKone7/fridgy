@@ -41,7 +41,7 @@
     }" -->
 <button mat-raised-button (click)="scanSuccessHandler('7613404113745')" >Scan Eggs</button>
 <button mat-raised-button (click)="scanSuccessHandler('7610632994122')" >fake scan unknown</button>
-<span>index: {{currentCameraIndex}} camera: {{currentCamera.label}} enabled: {{scannerEnabled}}</span>
+<span>index: {{currentCameraIndex}} camera: {{currentCamera?.label}} enabled: {{scannerEnabled}}</span>
 
 <zxing-scanner
     [enable]="scannerEnabled"
