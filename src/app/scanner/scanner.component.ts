@@ -142,11 +142,8 @@ export class ScannerComponent {
   }
 
   private activateCamera() {
-    let cameraIndex = (parseInt(localStorage.getItem('cameraPreference'), 10) || 0);
-    console.log('set camera to ', cameraIndex, this.availableCameras[cameraIndex]);
-    this.currentCamera = this.availableCameras[cameraIndex];
+    this.currentCamera = this.availableCameras[this.currentCameraIndex];
     this.scannerEnabled = true;
-    console.log('current cam', this.currentCamera);
 
   }
   private disableCamera() {

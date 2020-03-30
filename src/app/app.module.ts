@@ -57,6 +57,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatStepperModule} from '@angular/material/stepper';
 import { FridgeSettingsComponent } from './fridge-settings/fridge-settings.component';
 import { ScanActionComponent } from './scan-action/scan-action.component';
 import { FilterPipe } from './filter.pipe';
@@ -106,6 +107,7 @@ import { FilterPipe } from './filter.pipe';
     MatIconModule,
     MatProgressBarModule,
     MatChipsModule,
+    MatStepperModule,
     MatDatepickerModule,
     MatExpansionModule,
     MatGridListModule,
