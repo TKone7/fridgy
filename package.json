@@ -37,7 +37,7 @@
     "g": "^2.0.1",
     "hammerjs": "^2.0.8",
     "http-proxy-middleware": "^1.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngx-barcode-scanner": "0.0.7",
     "quagga": "^0.12.1",
     "rxjs": "~6.4.0",
